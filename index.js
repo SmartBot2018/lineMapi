@@ -5,9 +5,19 @@ const config = {
   channelAccessToken: 'NnnCDl7B2mwV9lgeRh682Pl+MY1OggkPdVJnYcvR2zOTAO37el5r0Z1PjqIIv1n3c9GwSQ1p/oWdiFOTPPvjKlEu+BU4+ejElMlso7ZKV2eTln8+JCAgc4//8c1BMFmMegwL8gGaVdodd+9M1bjvOgdB04t89/1O/w1cDnyilFU=',
   channelSecret: '823cb74cb02d642c94d5ce764387daa7',
 };
-let baseURL = 'URL';
+let baseURL = 'https://api-m-line.herokuapp.com';
 const client = new line.Client(config);
 const app = express();
+app.use('/static', express.static('static'));
+
+app.get('/', (req, res) => {
+  res.send(`<html>
+  <head><title>Bot</title></head>
+  <body> หน้าแรก </body>
+  <html>
+  `);
+});
+
 app.post('/callback', line.middleware(config), (req, res) => {
   if (req.body.destination) console.log("Destination User ID: " + req.body.destination);
   if (!Array.isArray(req.body.events)) return res.status(500).end();
@@ -123,7 +133,7 @@ function handleMessage(message, replyToken) {
     return replyText(to, 'สวัสดีค่ะ'); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
   }
   else if (msg.includes('ตำแหน่ง')) {
-    client.replyMessage(replyToken,
+    return client.replyMessage(replyToken,
     {
           "id": "1",
           "type": "location",
@@ -131,6 +141,15 @@ function handleMessage(message, replyToken) {
           "address": "21 ถนน เทพกระษัตรี ตำบล รัษฎา อำเภอเมืองภูเก็ต ภูเก็ต 83000 ประเทศไทย",
           "latitude": 7.910254,
           "longitude": 98.386094,
+    })
+  }
+  else if (msg.includes('ตารางกิจกรรม')) {
+    let picture_url = baseURL+'/static/picture.jpg';
+    return client.replyMessage(replyToken,
+    {
+      type: "image",
+      originalContentUrl: picture_url,
+      previewImageUrl: picture_url,
     })
   }
   else if (msg.startsWith('!สอน')) {
