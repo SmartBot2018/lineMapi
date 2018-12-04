@@ -137,7 +137,13 @@ function handleMessage(message, replyToken) {
   let to = replyToken; //Token สำหรับตอบกลับผู้ส่งแชทมา
   if (!to) return; //หากไม่มี Token ให้ย้อนกลับกรือจบการทำงานโค๊ด
   let database = nosql.chat;
-  let reply = database.forEach((item) => { if (msg.includes(item.ask)) { console.log(item); return item; } });
+  let reply = {};
+  database.forEach((item) => {
+    if (msg.includes(item.ask)) {
+      reply = item;
+      return; 
+    } 
+  });
   console.log(reply);
   if (reply && msg.includes(reply.ask)) {
       return replyText(to, reply.ans);
