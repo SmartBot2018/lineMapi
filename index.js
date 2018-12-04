@@ -116,7 +116,7 @@ ref.on("value", (snapshot) => {
   console.log(snapshot.val());
 });
 */
-let AdminID = '';
+let AdminID = 'U1b1284059649875eaf3b0a66d586989f';
 const nosql = {
   chat: [
     {
@@ -176,13 +176,14 @@ function handleMessage(message, replyToken, author) {
   }
   else if (msg.startsWith('!eval')) { //คำสั่งพิเศษ สำหรับ Debug bot แบบ Real-Time
     let cmd = msg.slice(6);
+    if (author.id != AdminID) return;
     eval(cmd).catch((err)=>{console.log(err)});
   }
   else
   {
     client.pushMessage(AdminID, {
       type: "text",
-      text: "ข้อวความจาก " + author.username + "\nID: " + author.id + "\nพูด: " + msg
+      text: "ข้อความจาก " + author.username + "\nID: " + author.id + "\nพูด: " + msg
     });
   }
 }
