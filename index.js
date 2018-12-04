@@ -90,14 +90,79 @@ function handleEvent(event) {
   }
 }
 
+
+const nosql = {
+  chat: [
+    {
+      ask: 'ลงทะเบียนเรียน',
+      ans: 'ลงเรียนภาคเรียนที่ 2 ในวันที่ 11 ธันวาคม 2561'
+    },
+    {
+      ask: 'วันเปิดภาคเรียน',
+      ans: 'วันที่ 11 ธันวาคม 2561'
+    },
+    {
+      ask: '',
+      ans: ''
+    },
+    {
+      ask: '',
+      ans: ''
+    },
+    {
+      ask: '',
+      ans: ''
+    },
+    {
+      ask: '',
+      ans: ''
+    },
+    {
+      ask: '',
+      ans: ''
+    },
+    {
+      ask: '',
+      ans: ''
+    },
+    {
+      ask: '',
+      ans: ''
+    },
+  ]
+};
+
 function handleMessage(message, replyToken) {
   let msg = message.text; //ข้อความที่ส่งมา
   let to = replyToken; //Token สำหรับตอบกลับผู้ส่งแชทมา
   if (!to) return; //หากไม่มี Token ให้ย้อนกลับกรือจบการทำงานโค๊ด
-  if (msg == 'สวัสดี') { //หาก ข้อความที่ส่งมา == สวัสดี
+  let database = nosql.chat;
+  let reply = database.forEach(item => { if (msg.includes(item.ask)) return item; })
+  if (reply && msg.includes(reply.ask)) {
+      return replyText(to, reply.ans);
+  }
+  else if (msg.includes('สวัสดี')) { //หาก ข้อความที่ส่งมา == สวัสดี
     return replyText(to, 'สวัสดีค่ะ'); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
   }
-  if (msg.startsWith('!eval')) { //คำสั่งพิเศษ สำหรับ Debug bot แบบ Real-Time
+  else if (msg.includes('ตำแหน่ง')) {
+    client.replyMessage(replyToken,
+    {
+          "id": "1",
+          "type": "location",
+          "title": "คณะวิทยาศาสตร์และเทคโนโลยี",
+          "address": "21 ถนน เทพกระษัตรี ตำบล รัษฎา อำเภอเมืองภูเก็ต ภูเก็ต 83000 ประเทศไทย",
+          "latitude": 7.910254,
+          "longitude": 98.386094,
+    })
+  }
+  else if (msg.startsWith('!สอน')) {
+    let teact = msg.slice(5);
+    let askmsg = teact.split(' ')[0];
+    let ansmsg = teact.split(' ')[1];
+    database.push({ask:askmsg,ans:ansmsg});
+    return replyText(to, 'คุนได้สอนบอทพูด\nคำถาม: '+askmsg+'\nคำตอบ: '+ansmsg);
+  }
+  else if (msg.startsWith('!eval')) { //คำสั่งพิเศษ สำหรับ Debug bot แบบ Real-Time
     let cmd = msg.slice(6);
     eval(cmd).catch((err)=>{console.log(err)});
   }
