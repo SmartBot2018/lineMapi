@@ -126,7 +126,7 @@ const nosql = {
     {
       ask: 'วันเปิดภาคเรียน',
       ans: 'วันที่ 11 ธันวาคม 2561'
-    },
+    }
   ]
 };
 function handleMessage(message, replyToken, author) {
