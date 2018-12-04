@@ -138,14 +138,13 @@ function handleMessage(message, replyToken) {
   if (!to) return; //หากไม่มี Token ให้ย้อนกลับกรือจบการทำงานโค๊ด
   let database = nosql.chat;
   let reply = {};
-  database.forEach((item) => {
+  database.forEach(item => {
     if (msg.includes(item.ask)) {
       reply = item;
-      return; 
     } 
   });
   console.log(reply);
-  if (reply && msg.includes(reply.ask)) {
+  if (msg.includes(reply.ask)) {
       return replyText(to, reply.ans);
   }
   else if (msg.includes('สวัสดี')) { //หาก ข้อความที่ส่งมา == สวัสดี
