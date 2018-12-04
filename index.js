@@ -54,6 +54,8 @@ function handleEvent(event) {
           return handleAudio(message, event.replyToken);
         case 'location':
           if (event.source.type == 'group') return;
+          console.log("Location:");
+          console.log(event);
           return handleLocation(message, event.replyToken);
         case 'sticker':
           return handleSticker(message, event.replyToken);
@@ -91,24 +93,13 @@ function handleEvent(event) {
 function handleMessage(message, replyToken) {
   let msg = message.text; //ข้อความที่ส่งมา
   let to = replyToken; //Token สำหรับตอบกลับผู้ส่งแชทมา
-  if (!to) return; //หากไม่มี Token ให้ย้อนกลับหรือจบการทำงานโค๊ด
-  if (msg == 'สวัสดี'|'hello') { //หาก ข้อความที่ส่งมา == สวัสดี
+  if (!to) return; //หากไม่มี Token ให้ย้อนกลับกรือจบการทำงานโค๊ด
+  if (msg == 'สวัสดี') { //หาก ข้อความที่ส่งมา == สวัสดี
     return replyText(to, 'สวัสดีค่ะ'); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
-  }
-  if (msg == 'ตำแหน่งที่ตั้ง') { //หาก ข้อความที่ส่งมา == สวัสดี
-    return replyText(to, 
-      {
-        "type": "location",
-        "title": "gf",
-        "address": "ff",
-        "latitude": 35.65910807942215,
-        "longitude": 139.70372892916203
-      }
-      ); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
   }
   if (msg.startsWith('!eval')) { //คำสั่งพิเศษ สำหรับ Debug bot แบบ Real-Time
     let cmd = msg.slice(6);
-    eval(cmd.join(' ')).catch((err)=>{console.log(err)});
+    eval(cmd).catch((err)=>{console.log(err)});
   }
 }
 
