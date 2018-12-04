@@ -374,8 +374,10 @@ function handleText(message, replyToken, source) {
         picture: '',
         status: '',
       };
-      if (!source.userID) return;
-      client.getProfile(source.userId).then((profile) => {
+      console.log(`Message: ${message.text} to ${replyToken} from ${source.userId || source.groupId || source.roomId}`);
+      if (!source.userId) return;
+      client.getProfile(source.userId)
+      .then((profile) => {
         author.id = profile.userId;
         author.username = profile.displayName;
         author.picture = profile.pictureUrl;
