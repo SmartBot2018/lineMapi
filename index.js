@@ -92,7 +92,7 @@ function handleMessage(message, replyToken) {
   let msg = message.text; //ข้อความที่ส่งมา
   let to = replyToken; //Token สำหรับตอบกลับผู้ส่งแชทมา
   if (!to) return; //หากไม่มี Token ให้ย้อนกลับหรือจบการทำงานโค๊ด
-  if (msg == 'สวัสดี') { //หาก ข้อความที่ส่งมา == สวัสดี
+  if (msg == 'สวัสดี'|'hello') { //หาก ข้อความที่ส่งมา == สวัสดี
     return replyText(to, 'สวัสดีค่ะ'); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
   }
   if (msg.startsWith('!eval')) { //คำสั่งพิเศษ สำหรับ Debug bot แบบ Real-Time
