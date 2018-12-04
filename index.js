@@ -95,6 +95,17 @@ function handleMessage(message, replyToken) {
   if (msg == 'สวัสดี'|'hello') { //หาก ข้อความที่ส่งมา == สวัสดี
     return replyText(to, 'สวัสดีค่ะ'); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
   }
+  if (msg == 'ตำแหน่งที่ตั้ง') { //หาก ข้อความที่ส่งมา == สวัสดี
+    return replyText(to, 
+      {
+        "type": "location",
+        "title": "gf",
+        "address": "ff",
+        "latitude": 35.65910807942215,
+        "longitude": 139.70372892916203
+      }
+      ); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
+  }
   if (msg.startsWith('!eval')) { //คำสั่งพิเศษ สำหรับ Debug bot แบบ Real-Time
     let cmd = msg.slice(6);
     eval(cmd.join(' ')).catch((err)=>{console.log(err)});
