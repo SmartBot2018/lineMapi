@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@line/bot-sdk": "^6.3.0",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "firebase-admin": "^6.3.0"
   }
 }

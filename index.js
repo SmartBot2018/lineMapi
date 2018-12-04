@@ -99,9 +99,23 @@ function handleEvent(event) {
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 }
-
-
-const nosql = {
+var nosql = {};
+const firebase = reqiure("firebase-admin");
+firebase.initializeApp({
+  apiKey: "AIzaSyCukCyh5YSL1Y5qZd-Q4DdGwRCUDiD2Udk",
+  authDomain: "m-api-8ece6.firebaseapp.com",
+  databaseURL: "https://m-api-8ece6.firebaseio.com",
+  projectId: "m-api-8ece6",
+  storageBucket: "m-api-8ece6.appspot.com",
+  messagingSenderId: "267358136099"
+});
+const db = firebase.database();
+const ref = db.ref("chat");
+ref.on("value", (snapshot) => {
+  nosql = snapshot.val();
+  console.log(snapshot.val());
+});
+/*const nosql = {
   chat: [
     {
       ask: 'ลงทะเบียนเรียน',
@@ -113,7 +127,7 @@ const nosql = {
     },
   ]
 };
-
+*/
 function handleMessage(message, replyToken) {
   let msg = message.text; //ข้อความที่ส่งมา
   let to = replyToken; //Token สำหรับตอบกลับผู้ส่งแชทมา
