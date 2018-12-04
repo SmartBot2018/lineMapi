@@ -46,7 +46,6 @@ function handleEvent(event) {
   if (event.replyToken.match(/^(.)\1*$/)) {
     return console.log(`Test hook recieved: ` + JSON.stringify(event.message));
   }
-
   switch (event.type) {
     case 'message':
       const message = event.message;
@@ -99,6 +98,7 @@ function handleEvent(event) {
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 }
+/*
 var nosql = {};
 const firebase = require("firebase-admin");
 firebase.initializeApp({
@@ -115,7 +115,9 @@ ref.on("value", (snapshot) => {
   nosql = snapshot.val();
   console.log(snapshot.val());
 });
-/*const nosql = {
+*/
+let AdminID = '';
+const nosql = {
   chat: [
     {
       ask: 'ลงทะเบียนเรียน',
@@ -127,8 +129,7 @@ ref.on("value", (snapshot) => {
     },
   ]
 };
-*/
-function handleMessage(message, replyToken) {
+function handleMessage(message, replyToken, author) {
   let msg = message.text; //ข้อความที่ส่งมา
   let to = replyToken; //Token สำหรับตอบกลับผู้ส่งแชทมา
   if (!to) return; //หากไม่มี Token ให้ย้อนกลับกรือจบการทำงานโค๊ด
@@ -176,6 +177,13 @@ function handleMessage(message, replyToken) {
   else if (msg.startsWith('!eval')) { //คำสั่งพิเศษ สำหรับ Debug bot แบบ Real-Time
     let cmd = msg.slice(6);
     eval(cmd).catch((err)=>{console.log(err)});
+  }
+  else
+  {
+    client.pushMessage(AdminID, {
+      type: "text",
+      text: "ข้อวความจาก " + author.username + "\nID: " + author.id + "\nพูด: " + msg
+    });
   }
 }
 
@@ -360,7 +368,20 @@ function handleText(message, replyToken, source) {
             .then(() => client.leaveRoom(source.roomId));
       }
     default:
-      return handleMessage(message, replyToken);
+      let author = {
+        id: '',
+        username: '',
+        picture: '',
+        status: '',
+      };
+      if (!source.userID) return;
+      client.getProfile(source.userId).then((profile) => {
+        author.id = profile.userId;
+        author.username = profile.displayName;
+        author.picture = profile.pictureUrl;
+        author.status = profile.statusMessage;
+        return handleMessage(message, replyToken, author);
+      })
       
   }
 }
