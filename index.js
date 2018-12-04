@@ -100,7 +100,7 @@ function handleEvent(event) {
   }
 }
 var nosql = {};
-const firebase = reqiure("firebase-admin");
+const firebase = require("firebase-admin");
 firebase.initializeApp({
   apiKey: "AIzaSyCukCyh5YSL1Y5qZd-Q4DdGwRCUDiD2Udk",
   authDomain: "m-api-8ece6.firebaseapp.com",
