@@ -162,7 +162,7 @@ function checkPostback(to, msg, author) {
     ask = item.ask;
     ans = msg;
     has = true;
-    delete item;
+    delete nosql.postback[0];
   }
   if (has && author.id == AdminID) {
     console.log("Ok!");
