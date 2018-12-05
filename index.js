@@ -160,8 +160,10 @@ function checkPostback(to, msg, author) {
   var ans = '';
   var item = database[database.length+1];
   if (!item) {
+    console.log("No!");
     return has;
   } else {
+    console.log("Yes!");
     id = item.id;
     ask = item.ask;
     ans = msg;
@@ -169,6 +171,7 @@ function checkPostback(to, msg, author) {
     item.id = "1";
   }
   if (has && author.id == AdminID) {
+    console.log("Ok!");
     client.pushMessage(id, {type:'text',text: msg}).catch((err) => console.error(err))
     nosql.chat.push({ask:ask,ans:ans});
   }
