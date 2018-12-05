@@ -127,12 +127,75 @@ const nosql = {
       ask: 'วันเปิดภาคเรียน',
       ans: 'วันที่ 11 ธันวาคม 2561'
     }
+  ],
+  teach: [
+    {
+      id: '',
+      ask: '',
+      ans: ''
+    }
   ]
 };
+
+const teachBot = (id) => {
+  let database = nosql.teach;
+  let askmsg = '';
+  let ansmsg = '';
+  let teacher = false;
+  database.forEach(item => {
+    if (item.id == id) {
+      askmsg = item.ask;
+      ansmsg = item.ans;
+      teacher = true;
+    }
+  });
+  return teacher;
+};
+
+const replyTeach = (to, msg, author) => {
+  if (!msg.length < 4) return;
+  let database = nosql.teach;
+  let askmsg = '';
+  let ansmsg = '';
+  let teacher = false;
+  database.forEach(item => {
+    if (item.id == id) {
+      askmsg = item.ask;
+      ansmsg = item.ans;
+      teacher = true;
+    }
+  });
+  if (askmsg == '') {
+    database.forEach(item => {
+      if (item.id == id) {
+        item.ask = msg;
+        return replyText(to, 'แล้วจะให้ตอบคำถามว่าอะไรครับ?');
+      }
+    });
+  }
+  if (ansmsg == '') {
+    database.forEach(item => {
+      if (item.id == id) {
+        item.ans = msg;
+        return replyText(to, 'บอทได้เรียนรู้\nคำถาม: '+item.ask+'\nคำตอบ: '+item.ans+'\n')
+        .then(delete item);
+      }
+    });
+  }
+};
+
 function handleMessage(message, replyToken, author) {
   let msg = message.text; //ข้อความที่ส่งมา
   let to = replyToken; //Token สำหรับตอบกลับผู้ส่งแชทมา
   if (!to) return; //หากไม่มี Token ให้ย้อนกลับกรือจบการทำงานโค๊ด
+
+  if (teachBot(author.id)) {
+    return replyTeach(to, msg, author);
+  } else if (msg.startsWith("สอน")) {
+    nosql.teach.push({id: author.id, ask: '', ans: ''});
+    return replyText(to, 'จะให้บอทเรียนคำถามอะไรครับ');
+  }
+
   let database = nosql.chat;
   let reply = {};
   database.forEach(item => {
