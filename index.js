@@ -220,11 +220,12 @@ function handleMessage(message, replyToken, author) {
   });
   if (msg.includes(reply.ask)) {
     if (reply.ans.startsWith('img')) {
-      let url = reply.ans.split(' ')[1];
-      return client.replyMessage(to ,{
+      let img_url = reply.ans.split(' ')[1];
+      return client.replyMessage(to,
+      {
         type: 'image',
-        originalContentUrl: url,
-        previewImageUrl: url
+        originalContentUrl: `${img_url}`,
+        previewImageUrl: `${img_url}`,
       }).catch((err) => console.log(err));
     } else {
       return replyText(to, reply.ans);
