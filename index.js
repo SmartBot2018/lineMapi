@@ -137,27 +137,22 @@ const nosql = {
   ]
 };
 
-const teachBot = (id) => {
+function teachBot(id) {
   let database = nosql.teach;
-  let askmsg = '';
-  let ansmsg = '';
-  let teacher = false;
+  var teacher = false;
   database.forEach(item => {
     if (item.id == id) {
-      askmsg = item.ask;
-      ansmsg = item.ans;
       teacher = true;
     }
   });
-  return teacher;
-};
+  return Boolean(teacher);
+}
 
 const replyTeach = (to, msg, author) => {
-  if (!msg.length < 4) return;
   let database = nosql.teach;
-  let askmsg = '';
-  let ansmsg = '';
-  let teacher = false;
+  var askmsg = '';
+  var ansmsg = '';
+  var teacher = false;
   database.forEach(item => {
     if (item.id == id) {
       askmsg = item.ask;
@@ -172,8 +167,7 @@ const replyTeach = (to, msg, author) => {
         return replyText(to, 'แล้วจะให้ตอบคำถามว่าอะไรครับ?');
       }
     });
-  }
-  if (ansmsg == '') {
+  } else if (ansmsg == '') {
     database.forEach(item => {
       if (item.id == id) {
         item.ans = msg;
@@ -181,7 +175,7 @@ const replyTeach = (to, msg, author) => {
         .then(delete nosql.teach[item]);
       }
     });
-  }
+  } else return true;
 };
 
 function handleMessage(message, replyToken, author) {
