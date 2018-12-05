@@ -499,12 +499,12 @@ function handleSticker(message, replyToken) {
 con.connect((err) => {
   if (err) throw err;
   console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
-let sql_select = 'SELECT nosql FROM botline WHERE id = 1';
-con.query(sql_select, (err, result) => {
-  if (err) throw err;
-  console.log('อ่านฐานข้อมูลเสร็จแล้ว');
-  console.log(result);
-});
+  let sql_select = 'SELECT nosql FROM botline WHERE id = 1';
+  con.query(sql_select, (err, result) => {
+    if (err) throw err;
+    console.log('อ่านฐานข้อมูลเสร็จแล้ว');
+    console.log({result[0]});
+  });
 });
 
 const port = process.env.PORT || 3000;
@@ -517,7 +517,7 @@ app.listen(port, () => {
   //บันทึกข้อมูลลงฐานข้อมูลทุกๆ 30 วินาที
   setInterval(function() {
     let backup = JSON.stringify(nosql);
-    let sql = `UPDATE linebot SET nosql = '${backup}' WHERE id = '1'`;
+    let sql = `UPDATE botline SET nosql = '${backup}' WHERE id = '1'`;
     con.query(sql, (err, result) => {
       if (err) throw err; 
       console.log(result.affectedRows + " record(s) updated");
