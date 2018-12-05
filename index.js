@@ -16,13 +16,20 @@ let baseURL = 'https://api-m-line.herokuapp.com';
 const client = new line.Client(config);
 const app = express();
 app.use('/static', express.static('static'));
-app.get('/', (req, res) => {
-  res.send(`<html>
-  <head><title>Bot</title></head>
-  <body> หน้าแรก </body>
-  <html>
-  `);
-});
+app.get('/', function (req, res)  {
+  var datalis =[];
+  db.collection('chat').get()
+  .then(snapshot => {
+    ob1=doc.data();
+    ob2={id:doc.id};
+    obj3=Object.assign(obj,obj2);
+    data_list.push(obj3);
+  })
+  res.render('list',{data:data_list});
+})
+.catch(err => {
+  console.log('Errror getting document',err);
+})
 app.post('/callback', line.middleware(config), (req, res) => {
   if (req.body.destination) console.log("Destination User ID: " + req.body.destination);
   if (!Array.isArray(req.body.events)) return res.status(500).end();
