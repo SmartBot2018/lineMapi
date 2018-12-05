@@ -1,6 +1,13 @@
 'use strict';
 const line = require('@line/bot-sdk');
 const express = require('express');
+const mysql = require('mysql');
+const con = mysql.createConnection({
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.pass,
+  database: process.env.user
+});
 const config = {
   channelAccessToken: 'NnnCDl7B2mwV9lgeRh682Pl+MY1OggkPdVJnYcvR2zOTAO37el5r0Z1PjqIIv1n3c9GwSQ1p/oWdiFOTPPvjKlEu+BU4+ejElMlso7ZKV2eTln8+JCAgc4//8c1BMFmMegwL8gGaVdodd+9M1bjvOgdB04t89/1O/w1cDnyilFU=',
   channelSecret: '823cb74cb02d642c94d5ce764387daa7',
@@ -219,17 +226,7 @@ function handleMessage(message, replyToken, author) {
     } 
   });
   if (msg.includes(reply.ask)) {
-    if (reply.ans.startsWith('img')) {
-      let img_url = reply.ans.split(' ')[1];
-      return client.pushMessage(author.id,
-      {
-        type: 'image',
-        originalContentUrl: `${img_url}`,
-        previewImageUrl: `${img_url}`
-      }).catch((err) => console.log(err));
-    } else {
-      return replyText(to, reply.ans);
-    }
+    return replyText(to, reply.ans);
   }
   else if (msg.includes('สวัสดี')) { //หาก ข้อความที่ส่งมา == สวัสดี
     return replyText(to, 'สวัสดีค่ะ'); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
@@ -499,6 +496,27 @@ function handleSticker(message, replyToken) {
   );
 }
 
+con.connect((err) => {
+  if (err) throw err;
+  console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
+let sql_create = "CREATE TABLE botline (id TEXT PRIMARY KEY, nosql LONGTEXT)";
+con.query(sql_create, (err, result) => {
+  if (err) throw err;
+  console.log("สร้างฐานข้อมูลเสร็จแล้ว");
+}).catch((err)=>console.log(err));
+let sql_insert = `INSERT INTO botline (id, nosql) VALUES ('1', '${JSON.stringify(nosql)}')`;
+con.query(sql_insert, (err, result) => {
+  if (err) throw err;
+  console.log("เขียนฐานข้อมูลเสร็จแล้ว");
+}).catch((err)=>console.log(err));
+let sql_select = 'SELECT nosql FROM linebot WHERE id = 1';
+con.query(sql_select, (err, result) => {
+  if (err) throw err;
+  console.log('อ่านฐานข้อมูลเสร็จแล้ว');
+  console.log(result);
+}).catch((err)=>console.log(err));
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   if (baseURL) {
@@ -506,4 +524,13 @@ app.listen(port, () => {
   } else {
     console.log("It seems that BASE_URL is not set.");
   }
+  //บันทึกข้อมูลลงฐานข้อมูลทุกๆ 30 วินาที
+  setInterval(function() {
+    let backup = JSON.stringify(nosql);
+    let sql = `UPDATE linebot SET nosql = '${backup}' WHERE id = '1'`;
+    con.query(sql, (err, result) => {
+      if (err) throw err; 
+      console.log(result.affectedRows + " record(s) updated");
+    }).catch((err)=>console.log(err));
+  }, 30000);
 });
