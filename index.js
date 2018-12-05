@@ -503,18 +503,18 @@ let sql_create = "CREATE TABLE botline (id TEXT PRIMARY KEY, nosql LONGTEXT)";
 con.query(sql_create, (err, result) => {
   if (err) throw err;
   console.log("สร้างฐานข้อมูลเสร็จแล้ว");
-}).catch((err)=>console.log(err));
+});
 let sql_insert = `INSERT INTO botline (id, nosql) VALUES ('1', '${JSON.stringify(nosql)}')`;
 con.query(sql_insert, (err, result) => {
   if (err) throw err;
   console.log("เขียนฐานข้อมูลเสร็จแล้ว");
-}).catch((err)=>console.log(err));
+});
 let sql_select = 'SELECT nosql FROM linebot WHERE id = 1';
 con.query(sql_select, (err, result) => {
   if (err) throw err;
   console.log('อ่านฐานข้อมูลเสร็จแล้ว');
   console.log(result);
-}).catch((err)=>console.log(err));
+});
 });
 
 const port = process.env.PORT || 3000;
@@ -531,6 +531,6 @@ app.listen(port, () => {
     con.query(sql, (err, result) => {
       if (err) throw err; 
       console.log(result.affectedRows + " record(s) updated");
-    }).catch((err)=>console.log(err));
+    });
   }, 30000);
 });
