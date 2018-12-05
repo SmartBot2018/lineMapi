@@ -154,7 +154,7 @@ const replyTeach = (to, msg, author) => {
   var ansmsg = '';
   var teacher = false;
   database.forEach(item => {
-    if (item.id == id) {
+    if (item.id == author.id) {
       askmsg = item.ask;
       ansmsg = item.ans;
       teacher = true;
@@ -162,14 +162,14 @@ const replyTeach = (to, msg, author) => {
   });
   if (askmsg == '') {
     database.forEach(item => {
-      if (item.id == id) {
+      if (item.id == author.id) {
         item.ask = msg;
         return replyText(to, 'แล้วจะให้ตอบคำถามว่าอะไรครับ?');
       }
     });
   } else if (ansmsg == '') {
     database.forEach(item => {
-      if (item.id == id) {
+      if (item.id == author.id) {
         item.ans = msg;
         return replyText(to, 'บอทได้เรียนรู้\nคำถาม: '+item.ask+'\nคำตอบ: '+item.ans+'\n')
         .then(delete nosql.teach[item]);
