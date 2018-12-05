@@ -12,7 +12,7 @@ app.use('/static', express.static('static'));
 app.get('/', (req, res) => {
   res.send(`<html>
   <head><title>Bot</title></head>
-  <body> หน้าแรก. </body>
+  <body> หน้าแรก </body>
   <html>
   `);
 });
@@ -218,9 +218,17 @@ function handleMessage(message, replyToken, author) {
       reply = item;
     } 
   });
-  console.log(reply);
   if (msg.includes(reply.ask)) {
+    if (reply.ans.startsWith('img')) {
+      let url = reply.ans.split(' ')[1];
+      return client.replyMessage(to ,{
+        type: 'image',
+        originalContentUrl: url,
+        previewImageUrl: url
+      }).catch((err) => console.log(err));
+    } else {
       return replyText(to, reply.ans);
+    }
   }
   else if (msg.includes('สวัสดี')) { //หาก ข้อความที่ส่งมา == สวัสดี
     return replyText(to, 'สวัสดีค่ะ'); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
