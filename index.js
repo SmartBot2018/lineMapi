@@ -46,6 +46,7 @@ function handleEvent(event) {
   if (event.replyToken.match(/^(.)\1*$/)) {
     return console.log(`Test hook recieved: ` + JSON.stringify(event.message));
   }
+  if (event.source.type !== 'user') return;
   switch (event.type) {
     case 'message':
       const message = event.message;
@@ -526,17 +527,7 @@ function handleText(message, replyToken, source) {
           },
         }
       );
-    case 'bye':
-      switch (source.type) {
-        case 'user':
-          return replyText(replyToken, 'Bot can\'t leave from 1:1 chat');
-        case 'group':
-          return replyText(replyToken, '✅ | กำลังออกจากกลุ่มค่ะ')
-            .then(() => client.leaveGroup(source.groupId));
-        case 'room':
-          return replyText(replyToken, '✅ | กำลังออกจากห้องค่ะ')
-            .then(() => client.leaveRoom(source.roomId));
-      }
+    
     default:
       let author = {
         id: '',
