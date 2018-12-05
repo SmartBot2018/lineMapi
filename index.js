@@ -157,7 +157,7 @@ function checkPostback(to, msg, author) {
   var has = false;
   var ask = '';
   var ans = '';
-  var item = database[0];
+  var item = database[1];
   if (!item) {
     return has;
   } else {
@@ -168,7 +168,7 @@ function checkPostback(to, msg, author) {
     item.id = "1";
   }
   if (has && author.id == AdminID) {
-    client.pushMessage(id, {type:'text',text:msg});
+    client.pushMessage(id, {type:'text',text: msg}).catch((err) => console.error(err))
     nosql.chat.push({ask:ask,ans:ans});
   }
   return has;
@@ -221,7 +221,7 @@ function handleMessage(message, replyToken, author) {
   let to = replyToken; //Token สำหรับตอบกลับผู้ส่งแชทมา
   if (!to) return; //หากไม่มี Token ให้ย้อนกลับกรือจบการทำงานโค๊ด
   if (checkPostback(to, msg, author)) {
-    return undefined;
+    return;
   } else if (teachBot(author.id)) {
     return replyTeach(to, msg, author);
   } else if (msg.startsWith("สอน")) {
