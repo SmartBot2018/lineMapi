@@ -178,7 +178,7 @@ const replyTeach = (to, msg, author) => {
       if (item.id == id) {
         item.ans = msg;
         return replyText(to, 'บอทได้เรียนรู้\nคำถาม: '+item.ask+'\nคำตอบ: '+item.ans+'\n')
-        .then(delete item);
+        .then(delete nosql.teach[item]);
       }
     });
   }
