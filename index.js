@@ -171,6 +171,7 @@ const replyTeach = (to, msg, author) => {
     database.forEach(item => {
       if (item.id == author.id) {
         item.ans = msg;
+        nosql.chat.push({ask: item.ask,ans: item.ans});
         return replyText(to, 'บอทได้เรียนรู้\nคำถาม: '+item.ask+'\nคำตอบ: '+item.ans+'\n')
         .then(delete nosql.teach[item]);
       }
