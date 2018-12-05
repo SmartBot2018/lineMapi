@@ -243,7 +243,7 @@ function handleMessage(message, replyToken, author) {
     client.pushMessage(AdminID, {
       type: "flex",
       altText: "ข้อความใหม่",
-      contents: [
+      contents: 
         {
           "type": "bubble",
           "header": {
@@ -319,7 +319,6 @@ function handleMessage(message, replyToken, author) {
             ]
           }
         }
-      ]
     });
   }
 }
