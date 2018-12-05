@@ -168,7 +168,7 @@ function checkPostback(to, msg, author) {
     item.id = "1";
   }
   if (has && author.id == AdminID) {
-    client.pushMessage(id, msg);
+    client.pushMessage(id, {type:'text',text:msg});
     nosql.chat.push({ask:ask,ans:ans});
   }
   return has;
