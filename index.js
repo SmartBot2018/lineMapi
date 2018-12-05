@@ -91,7 +91,7 @@ function handleEvent(event) {
   }
 }
 /*
-var nosql = {};
+var rtdb;
 const firebase = require("firebase-admin");
 firebase.initializeApp({
   apiKey: "AIzaSyCukCyh5YSL1Y5qZd-Q4DdGwRCUDiD2Udk",
@@ -104,7 +104,7 @@ firebase.initializeApp({
 const db = firebase.database();
 const ref = db.ref("chat");
 ref.on("value", (snapshot) => {
-  nosql = snapshot.val();
+  rtdb = snapshot.val();
   console.log(snapshot.val());
 });
 */
@@ -221,11 +221,11 @@ function handleMessage(message, replyToken, author) {
   if (msg.includes(reply.ask)) {
     if (reply.ans.startsWith('img')) {
       let img_url = reply.ans.split(' ')[1];
-      return client.replyMessage(to,
+      return client.pushMessage(author.id,
       {
         type: 'image',
         originalContentUrl: `${img_url}`,
-        previewImageUrl: `${img_url}`,
+        previewImageUrl: `${img_url}`
       }).catch((err) => console.log(err));
     } else {
       return replyText(to, reply.ans);
