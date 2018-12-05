@@ -499,7 +499,7 @@ function handleSticker(message, replyToken) {
 con.connect((err) => {
   if (err) throw err;
   console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
-let sql_create = "CREATE TABLE botline (id TEXT PRIMARY KEY, nosql LONGTEXT)";
+let sql_create = "CREATE TABLE botline (id VARCHAR(1) PRIMARY KEY, nosql LONGTEXT)";
 con.query(sql_create, (err, result) => {
   if (err) throw err;
   console.log("สร้างฐานข้อมูลเสร็จแล้ว");
