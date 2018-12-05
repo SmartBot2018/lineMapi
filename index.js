@@ -90,7 +90,7 @@ function handleEvent(event) {
       console.log(event.postback);
       if (data.startsWith('nomsg')) {
         let id = data.split('_')[1];
-        nosql.postback.push({id:id, ask:'', ans:''});
+        nosql.postback.push({id:id, ask:data, ans:''});
         return client.pushMessage(AdminID, {type:'text',text:rep});
       }
       if (data === 'DATE' || data === 'TIME' || data === 'DATETIME') {
@@ -157,7 +157,7 @@ function checkPostback(to, msg, author) {
   var has = false;
   var ask = '';
   var ans = '';
-  var item = database[1];
+  var item = database[database.length+1];
   if (!item) {
     return has;
   } else {
