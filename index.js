@@ -86,7 +86,8 @@ function handleEvent(event) {
     
     case 'postback':
       let data = event.postback.data;
-      console.log(postback);
+      let rep = 'พิมพ์ข้อความเพื่อตอบผู้ใช้และบันทึกคำถาม';
+      console.log(event.postback);
       if (data === 'DATE' || data === 'TIME' || data === 'DATETIME') {
         data += `(${JSON.stringify(event.postback.params)})`;
       }
@@ -312,8 +313,7 @@ function handleMessage(message, replyToken, author) {
               "action": {
                 "type": "postback",
                 "label": "ตอบ",
-                "data": 'nomsg_'+author.id, 
-                "text": 'พิมพ์ข้อความเพื่อตอบผู้ใช้และบันทึกคำถาม'
+                "data": 'nomsg_'+author.id
               }
             }
           ]
