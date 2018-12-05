@@ -499,22 +499,13 @@ function handleSticker(message, replyToken) {
 con.connect((err) => {
   if (err) throw err;
   console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
-let sql_create = "CREATE TABLE botline (id VARCHAR(1) PRIMARY KEY, nosql LONGTEXT)";
-con.query(sql_create, (err, result) => {
-  if (err) throw err;
-  console.log("สร้างฐานข้อมูลเสร็จแล้ว");
-});
-let sql_insert = `INSERT INTO botline (id, nosql) VALUES ('1', '${JSON.stringify(nosql)}')`;
-con.query(sql_insert, (err, result) => {
-  if (err) throw err;
-  console.log("เขียนฐานข้อมูลเสร็จแล้ว");
-});
-let sql_select = 'SELECT nosql FROM linebot WHERE id = 1';
-con.query(sql_select, (err, result) => {
-  if (err) throw err;
-  console.log('อ่านฐานข้อมูลเสร็จแล้ว');
-  console.log(result);
-});
+  let sql_select = 'SELECT nosql FROM botline WHERE id = 1';
+  con.query(sql_select, (err, result) => {
+    if (err) throw err;
+    console.log('อ่านฐานข้อมูลเสร็จแล้ว');
+    console.log(result[0].nosql);
+    con.destroy();
+  });
 });
 
 const port = process.env.PORT || 3000;
@@ -526,11 +517,16 @@ app.listen(port, () => {
   }
   //บันทึกข้อมูลลงฐานข้อมูลทุกๆ 30 วินาที
   setInterval(function() {
+   con.connect((err) => {
+    if (err) throw err;
+    console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
     let backup = JSON.stringify(nosql);
-    let sql = `UPDATE linebot SET nosql = '${backup}' WHERE id = '1'`;
+    let sql = `UPDATE botline SET nosql = '${backup}' WHERE id = '1'`;
     con.query(sql, (err, result) => {
       if (err) throw err; 
       console.log(result.affectedRows + " record(s) updated");
+      con.destroy();
     });
-  }, 30000);
+   });
+  }, 5000);
 });
