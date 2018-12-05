@@ -162,7 +162,7 @@ function checkPostback(to, msg, author) {
     ask = item.ask;
     ans = msg;
     has = true;
-    item.id = "1";
+    delete item;
   }
   if (has && author.id == AdminID) {
     console.log("Ok!");
