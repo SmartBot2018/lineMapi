@@ -97,9 +97,11 @@ function handleEvent(event) {
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 }
-/*
+
 var rtdb;
-const firebase = require("firebase-admin");
+var firebase = require("firebase-admin");
+require("firebase/firestore")
+
 firebase.initializeApp({
   apiKey: "AIzaSyCukCyh5YSL1Y5qZd-Q4DdGwRCUDiD2Udk",
   authDomain: "m-api-8ece6.firebaseapp.com",
@@ -108,13 +110,14 @@ firebase.initializeApp({
   storageBucket: "m-api-8ece6.appspot.com",
   messagingSenderId: "267358136099"
 });
-const db = firebase.database();
-const ref = db.ref("chat");
-ref.on("value", (snapshot) => {
-  rtdb = snapshot.val();
+var db = firebase.firestore();
+db.collection('chat').add({
+  ans : 'test',
+  ask : 'test' 
+}).then(ref => {
   console.log(snapshot.val());
 });
-*/
+
 let AdminID = 'U1b1284059649875eaf3b0a66d586989f';
 const nosql = {
   chat: [
