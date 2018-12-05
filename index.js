@@ -379,8 +379,8 @@ function handleText(message, replyToken, source) {
 function handleImage(message, replyToken) {
   let getContent;
   if (message.contentProvider.type === "line") {
-    var downloadPath = path.join(__dirname, 'downloaded', `${message.id}.png`);
-    var previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.png`);
+    var downloadPath = path.join(__dirname, 'downloaded', `${message.id}.jpg`);
+    var previewPath = path.join(__dirname, 'downloaded', `${message.id}-preview.jpg`);
     getContent = downloadContent(message.id, downloadPath)
       .then((downloadPath) => {
         cp.execSync(`convert -resize 240x jpeg:${downloadPath} jpeg:${previewPath}`);
