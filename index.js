@@ -88,6 +88,11 @@ function handleEvent(event) {
       let data = event.postback.data;
       let rep = 'พิมพ์ข้อความเพื่อตอบผู้ใช้และบันทึกคำถาม';
       console.log(event.postback);
+      if (data.startsWith('nomsg')) {
+        let id = data.split('_')[1];
+        nosql.postback.push({id:id, ask:'', ans:''});
+        return client.pushMessage(AdminID, {type:'text',text:rep});
+      }
       if (data === 'DATE' || data === 'TIME' || data === 'DATETIME') {
         data += `(${JSON.stringify(event.postback.params)})`;
       }
@@ -136,8 +141,36 @@ const nosql = {
       ask: '',
       ans: ''
     }
+  ],
+  postback: [
+    {
+      id: '',
+      ask: '',
+      ans: ''
+    }
   ]
 };
+
+function checkPostback(to, msg, author) {
+  let database = nosql.postback;
+  var id = '';
+  var has = false;
+  var ask = '';
+  var ans = '';
+  database.forEach(item => {
+    if (item.id !== "1") {
+      id = item.id;
+      ask = item.ask;
+      ans = msg;
+      has = true;
+    }
+  }).then(item.id = "1");
+  if (has && author.id == AdminID) {
+    client.pushMessage(id, msg);
+    nosql.chat.push({ask:ask,ans:ans});
+  }
+  return has;
+}
 
 function teachBot(id) {
   let database = nosql.teach;
@@ -185,8 +218,9 @@ function handleMessage(message, replyToken, author) {
   let msg = message.text; //ข้อความที่ส่งมา
   let to = replyToken; //Token สำหรับตอบกลับผู้ส่งแชทมา
   if (!to) return; //หากไม่มี Token ให้ย้อนกลับกรือจบการทำงานโค๊ด
-
-  if (teachBot(author.id)) {
+  if (checkPostback(to, msg, author)) {
+    return undefined;
+  } else if (teachBot(author.id)) {
     return replyTeach(to, msg, author);
   } else if (msg.startsWith("สอน")) {
     nosql.teach.push({id: author.id, ask: '', ans: ''});
