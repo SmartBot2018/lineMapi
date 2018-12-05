@@ -503,7 +503,7 @@ con.connect((err) => {
   con.query(sql_select, (err, result) => {
     if (err) throw err;
     console.log('อ่านฐานข้อมูลเสร็จแล้ว');
-    console.log({result[0]});
+    console.log({result});
   });
 });
 
