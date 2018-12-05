@@ -173,7 +173,7 @@ const replyTeach = (to, msg, author) => {
         item.ans = msg;
         nosql.chat.push({ask: item.ask,ans: item.ans});
         return replyText(to, 'บอทได้เรียนรู้\nคำถาม: '+item.ask+'\nคำตอบ: '+item.ans+'\n')
-        .then(delete nosql.teach[item]);
+        .then(item.id = '1'+(Math.floor(Math.random * 9999)));
       }
     });
   } else return true;
