@@ -90,7 +90,7 @@ function handleEvent(event) {
       console.log(event.postback);
       if (data.startsWith('nomsg')) {
         let id = data.split('_')[1];
-        nosql.postback.push({id:id, ask:data, ans:''});
+        nosql.postback.push({id:id, ask: event.postback.ask, ans:''});
         return client.pushMessage(AdminID, {type:'text',text:rep});
       }
       if (data === 'DATE' || data === 'TIME' || data === 'DATETIME') {
@@ -349,7 +349,8 @@ function handleMessage(message, replyToken, author) {
               "action": {
                 "type": "postback",
                 "label": "ตอบ",
-                "data": 'nomsg_'+author.id
+                "data": 'nomsg_'+author.id,
+                "ask": msg
               }
             }
           ]
