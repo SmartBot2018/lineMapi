@@ -503,7 +503,8 @@ con.connect((err) => {
   con.query(sql_select, (err, result) => {
     if (err) throw err;
     console.log('อ่านฐานข้อมูลเสร็จแล้ว');
-    console.log(result[0]);
+    console.log(result[0].nosql);
+    con.destroy();
   });
 });
 
@@ -515,12 +516,17 @@ app.listen(port, () => {
     console.log("It seems that BASE_URL is not set.");
   }
   //บันทึกข้อมูลลงฐานข้อมูลทุกๆ 30 วินาที
-  /*setInterval(function() {
+  setInterval(function() {
+   con.connect((err) => {
+    if (err) throw err;
+    console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
     let backup = JSON.stringify(nosql);
     let sql = `UPDATE botline SET nosql = '${backup}' WHERE id = '1'`;
     con.query(sql, (err, result) => {
       if (err) throw err; 
       console.log(result.affectedRows + " record(s) updated");
+      con.destroy();
     });
-  }, 30000);*/
+   });
+  }, 5000);
 });
