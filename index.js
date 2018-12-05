@@ -16,20 +16,13 @@ let baseURL = 'https://api-m-line.herokuapp.com';
 const client = new line.Client(config);
 const app = express();
 app.use('/static', express.static('static'));
-app.get('/', function (req, res)  {
-  var datalis =[];
-  db.collection('chat').get()
-  .then(snapshot => {
-    ob1=doc.data();
-    ob2={id:doc.id};
-    obj3=Object.assign(obj,obj2);
-    data_list.push(obj3);
-  })
-  res.render('list',{data:data_list});
-})
-.catch(err => {
-  console.log('Errror getting document',err);
-})
+app.get('/', (req, res) => {
+  res.send(`<html>
+  <head><title>Bot</title></head>
+  <body> หน้าแรก </body>
+  <html>
+  `);
+});
 app.post('/callback', line.middleware(config), (req, res) => {
   if (req.body.destination) console.log("Destination User ID: " + req.body.destination);
   if (!Array.isArray(req.body.events)) return res.status(500).end();
@@ -104,11 +97,9 @@ function handleEvent(event) {
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 }
-
+/*
 var rtdb;
-var firebase = require("firebase-admin");
-require("firebase/firestore")
-
+const firebase = require("firebase-admin");
 firebase.initializeApp({
   apiKey: "AIzaSyCukCyh5YSL1Y5qZd-Q4DdGwRCUDiD2Udk",
   authDomain: "m-api-8ece6.firebaseapp.com",
@@ -117,14 +108,13 @@ firebase.initializeApp({
   storageBucket: "m-api-8ece6.appspot.com",
   messagingSenderId: "267358136099"
 });
-var db = firebase.firestore();
-db.collection('chat').add({
-  ans : 'test',
-  ask : 'test' 
-}).then(ref => {
+const db = firebase.database();
+const ref = db.ref("chat");
+ref.on("value", (snapshot) => {
+  rtdb = snapshot.val();
   console.log(snapshot.val());
 });
-
+*/
 let AdminID = 'U1b1284059649875eaf3b0a66d586989f';
 const nosql = {
   chat: [
@@ -138,7 +128,7 @@ const nosql = {
     },
     {
       ask: 'ติดต่อ',
-      ans: "เลขที่ 21 หมู่ที่ 6 ตำบลรัษฎา \nอำเภอเมือง จังหวัดภูเก็ต 83000  \nหมายเลขโทรศัพท์ 076-240-474 ต่อ 4000 \n076-211-959 ต่อ 4000  \nหมายเลขโทรศัพท์ / โทรสาร 076-218-806"
+      ans: "เลขที่ 21 หมู่ที่ 6 ตำบลรัษฎา \nอำเภอเมือง จังหวัดภูเก็ต 83000  \nหมายเลขโทรศัพท์ 076-240-474 ต่อ 4000 \n076-211-959 ต่อ 4000 \nหมายเลขโทรศัพท์ / โทรสาร 076-218-806"
     }
   ],
   teach: [
