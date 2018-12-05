@@ -143,13 +143,7 @@ const nosql = {
       ans: ''
     }
   ],
-  postback: [
-    {
-      id: '',
-      ask: '',
-      ans: ''
-    }
-  ]
+  postback: []
 };
 
 function checkPostback(to, msg, author) {
@@ -158,7 +152,7 @@ function checkPostback(to, msg, author) {
   var has = false;
   var ask = '';
   var ans = '';
-  var item = database[database.length+1];
+  var item = database[0];
   if (!item) {
     console.log("No!");
     return has;
