@@ -260,13 +260,13 @@ function handleMessage(message, replyToken, author) {
         },
         "hero": {
           "type": "image",
-          "url": author.avatar,
+          "url": `${author.picture}`,
           "size": "full",
           "aspectRatio": "20:13",
           "aspectMode": "cover",
           "action": {
             "type": "uri",
-            "uri": author.avatar
+            "uri": `${author.picture}`
           }
         },
         "body": {
