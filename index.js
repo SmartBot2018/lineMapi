@@ -86,6 +86,7 @@ function handleEvent(event) {
     
     case 'postback':
       let data = event.postback.data;
+      console.log(postback);
       if (data === 'DATE' || data === 'TIME' || data === 'DATETIME') {
         data += `(${JSON.stringify(event.postback.params)})`;
       }
@@ -240,8 +241,85 @@ function handleMessage(message, replyToken, author) {
   else
   {
     client.pushMessage(AdminID, {
-      type: "text",
-      text: "ข้อความจาก " + author.username + "\nID: " + author.id + "\nพูด: " + msg
+      type: "flex",
+      altText: "ข้อความใหม่",
+      contents: [
+        {
+          "type": "bubble",
+          "header": {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "text",
+                "text": "User "+author.id,
+                "weight": "bold",
+                "color": "#aaaaaa",
+                "size": "sm"
+              }
+            ]
+          },
+          "hero": {
+            "type": "image",
+            "url": author.avatar,
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover",
+            "action": {
+              "type": "uri",
+              "uri": author.avatar
+            }
+          },
+          "body": {
+            "type": "box",
+            "layout": "horizontal",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "vertical",
+                "flex": 2,
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": author.username+" ส่งข้อความถึงบอท",
+                    "gravity": "top",
+                    "size": "md",
+                    "flex": 1
+                  },
+                  {
+                    "type": "separator"
+                  },
+                  {
+                    "type": "text",
+                    "text": msg,
+                    "gravity": "center",
+                    "wrap": true,
+                    "size": "xs",
+                    "flex": 2
+                  }
+                ]
+              }
+            ]
+          },
+          "footer": {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "button",
+                "style": "primary",
+                "color": "#000000",
+                "action": {
+                  "type": "postback",
+                  "label": "ตอบ",
+                  "data": 'nomsg_'+author.id, text: 'พิมพ์ข้อความเพื่อตอบผู้ใช้และบันทึกคำถาม'
+                }
+              }
+            ]
+          }
+        }
+      ]
     });
   }
 }
