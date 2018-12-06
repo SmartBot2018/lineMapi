@@ -133,10 +133,9 @@ function checkPostback(to, msg, author) {
   var has = false;
   var ask = '';
   var ans = '';
-  var item = nosql.postback[0];
+  var item = database[0];
   if (!item) {
     console.log("No postback handle.");
-    return has;
   } else {
     console.log("Do postback habdle.");
     id = item.id;
@@ -150,7 +149,7 @@ function checkPostback(to, msg, author) {
     client.pushMessage(id, {type:'text',text: msg}).catch((err) => console.error(err))
     nosql.chat.push({ask:ask,ans:ans});
   }
-  return has;
+  return Boolean(has);
 }
 
 function teachBot(id) {
