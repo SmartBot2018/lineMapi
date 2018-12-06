@@ -486,11 +486,11 @@ function handleSticker(message, replyToken) {
 }
 
 con.connect((err) => {
-  if (err) throw err;
+  if (err) return console.error(err);
   console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
-  let sql_select = 'SELECT * FROM botline WHERE id = 1';
-  con.query(sql_select, (err, result) => {
-    if (err) throw err;
+  let sql_select = 'SELECT * FROM botline';
+  con.query(sql_select, (error, result) => {
+    if (error) return console.error(error);
     console.log('อ่านฐานข้อมูลเสร็จแล้ว');
     console.log(result[0]);
     con.destroy();
@@ -507,12 +507,12 @@ app.listen(port, () => {
   //บันทึกข้อมูลลงฐานข้อมูลทุกๆ 5 วินาที
   setInterval(function() {
    con.connect((err) => {
-    if (err) throw err;
+    if (err) return console.error(err);
     console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
     let backup = JSON.stringify(nosql);
     let sql = `UPDATE botline SET nosql = '${backup}' WHERE id = '1'`;
-    con.query(sql, (err, result) => {
-      if (err) throw err; 
+    con.query(sql, (error, result) => {
+    if (error) return console.error(error);
       console.log(result.affectedRows + " record(s) updated");
       con.destroy();
     });
