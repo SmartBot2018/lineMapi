@@ -492,8 +492,11 @@ con.connect((err) => {
   con.query(sql_select, (error, result) => {
     if (error) return console.error(error);
     console.log('อ่านฐานข้อมูลเสร็จแล้ว');
-    console.log(result[0]);
-    con.destroy();
+    console.log(result[0].nosql);
+    if(!con._connectCalled) 
+    {
+      con.connect();
+    }
   });
 });
 
@@ -514,7 +517,10 @@ app.listen(port, () => {
     con.query(sql, (error, result) => {
     if (error) return console.error(error);
       console.log(result.affectedRows + " record(s) updated");
-      con.destroy();
+      if(!con._connectCalled) 
+      {
+        con.connect();
+      }
     });
    });
   }, 5000);
