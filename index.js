@@ -129,11 +129,12 @@ const nosql = {
 
 function checkPostback(to, msg, author) {
   let database = nosql.postback;
+  let index = Object.keys(database).length;
   var id = '';
   var has = false;
   var ask = '';
   var ans = '';
-  var item = database[0];
+  var item = database[index-1];
   if (!item) {
     console.log("No postback handle.");
   } else {
@@ -142,7 +143,7 @@ function checkPostback(to, msg, author) {
     ask = item.ask;
     ans = msg;
     has = true;
-    delete nosql.postback[0];
+    delete nosql.postback[index-1];
   }
   if (has && author.id == AdminID) {
     console.log("Push Mesaage to User Id");
