@@ -495,7 +495,7 @@ con.query(sql_select, (error, result) => {
   if (error) return console.error(error);
   console.log('อ่านฐานข้อมูลเสร็จแล้ว');
   console.log(result[0].nosql);
-  //console.log(JSON.parse(result[0].nosql));
+  console.log(JSON.parse(result[0].nosql));
   //nosql = JSON.parse(result[0].nosql);
 });
 
