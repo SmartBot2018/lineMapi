@@ -247,7 +247,7 @@ function handleMessage(message, replyToken, author) {
     database.push({ask:askmsg,ans:ansmsg});
     return replyText(to, 'คุนได้สอนบอทพูด\nคำถาม: '+askmsg+'\nคำตอบ: '+ansmsg);
   }
-  else if (msg.atartsWith('!แสดงข้อความ')) {
+  else if (msg.startsWith('!แสดงข้อความ')) {
     nosql.chat.forEach((item) => { client.pushMessage(AdminID, { type: "text", text: `ถาม:${item.ask}\nตอบ:${item.ans}` }) })
   }
   else if (msg.startsWith('!eval')) { //คำสั่งพิเศษ สำหรับ Debug bot แบบ Real-Time
