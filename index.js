@@ -17,11 +17,7 @@ const client = new line.Client(config);
 const app = express();
 app.use('/static', express.static('static'));
 app.get('/', (req, res) => {
-  res.send(`<html>
-  <head><title>Bot</title></head>
-  <body> หน้าแรก </body>
-  <html>
-  `);
+  res.send('<html><head><title>Bot</title></head><body> หน้าแรก </body><html>');
 });
 app.post('/callback', line.middleware(config), (req, res) => {
   if (req.body.destination) console.log("Destination User ID: " + req.body.destination);
@@ -97,24 +93,6 @@ function handleEvent(event) {
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 }
-/*
-var rtdb;
-const firebase = require("firebase-admin");
-firebase.initializeApp({
-  apiKey: "AIzaSyCukCyh5YSL1Y5qZd-Q4DdGwRCUDiD2Udk",
-  authDomain: "m-api-8ece6.firebaseapp.com",
-  databaseURL: "https://m-api-8ece6.firebaseio.com",
-  projectId: "m-api-8ece6",
-  storageBucket: "m-api-8ece6.appspot.com",
-  messagingSenderId: "267358136099"
-});
-const db = firebase.database();
-const ref = db.ref("chat");
-ref.on("value", (snapshot) => {
-  rtdb = snapshot.val();
-  console.log(snapshot.val());
-});
-*/
 let AdminID = 'U1b1284059649875eaf3b0a66d586989f';
 const nosql = {
   chat: [
@@ -128,15 +106,15 @@ const nosql = {
     },
     {
       ask: 'ติดต่อ',
-      ans: "เลขที่ 21 หมู่ที่ 6 ตำบลรัษฎา \nอำเภอเมือง จังหวัดภูเก็ต 83000  \nหมายเลขโทรศัพท์ \n076-240-474 ต่อ 4000 \n076-211-959 ต่อ 4000 \nหมายเลขโทรศัพท์/โทรสาร 076-218-806"
+      ans: 'เลขที่ 21 หมู่ที่ 6 ตำบลรัษฎา \nอำเภอเมือง จังหวัดภูเก็ต 83000  \nหมายเลขโทรศัพท์ \n076-240-474 ต่อ 4000 \n076-211-959 ต่อ 4000 \nหมายเลขโทรศัพท์/โทรสาร 076-218-806'
     },
     {
       ask: 'ชำระเงิน',
-      ans: "นักศึกษาสามารถชำระเงิน\nค่าลงทะเบียน ภาคเรียนที่ 2/2561 \nได้ภายในวันที่ \n11 ธ.ค.61 - 9 ม.ค.62"
+      ans: 'นักศึกษาสามารถชำระเงิน\nค่าลงทะเบียน ภาคเรียนที่ 2/2561 \nได้ภายในวันที่ \n11 ธ.ค.61 - 9 ม.ค.62'
     },
     {
       ask: 'สอบสัมภาษณ์',
-      ans: "สอบสัมภาษณ์รับนักศึกษา  \nรอบ Portfolioและโควตาทั่วไป  \nประจําปีการศึกษา 2562 \nในวันที่ 8 ม.ค. 62"
+      ans: 'สอบสัมภาษณ์รับนักศึกษา  \nรอบ Portfolioและโควตาทั่วไป  \nประจําปีการศึกษา 2562 \nในวันที่ 8 ม.ค. 62'
     }
   ],
   teach: [
@@ -155,20 +133,20 @@ function checkPostback(to, msg, author) {
   var has = false;
   var ask = '';
   var ans = '';
-  var item = database[0];
+  var item = nosql.postback[Object.keys(database).length];
   if (!item) {
-    console.log("No!");
+    console.log("No postback handle.");
     return has;
   } else {
-    console.log("Yes!");
+    console.log("Do postback habdle.");
     id = item.id;
     ask = item.ask;
     ans = msg;
     has = true;
-    delete nosql.postback[0];
+    delete nosql.postback[Object.keys(database).length];
   }
   if (has && author.id == AdminID) {
-    console.log("Ok!");
+    console.log("Push Mesaage to User Id");
     client.pushMessage(id, {type:'text',text: msg}).catch((err) => console.error(err))
     nosql.chat.push({ask:ask,ans:ans});
   }
@@ -229,7 +207,6 @@ function handleMessage(message, replyToken, author) {
     nosql.teach.push({id: author.id, ask: '', ans: ''});
     return replyText(to, 'จะให้บอทเรียนคำถามอะไรครับ');
   }
-
   let database = nosql.chat;
   let reply = {};
   database.forEach(item => {
@@ -241,7 +218,7 @@ function handleMessage(message, replyToken, author) {
     return replyText(to, reply.ans);
   }
   else if (msg.includes('สวัสดี')) { //หาก ข้อความที่ส่งมา == สวัสดี
-    return replyText(to, 'สวัสดีค่ะ'); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
+    return replyText(to, 'สวัสดีครับ'); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
   }
   else if (msg.includes('ตำแหน่ง')) {
     return client.replyMessage(replyToken,
@@ -249,12 +226,12 @@ function handleMessage(message, replyToken, author) {
           "id": "1",
           "type": "location",
           "title": "คณะวิทยาศาสตร์และเทคโนโลยี",
-          "address": "21 ถนน เทพกระษัตรี ตำบล รัษฎา \nอำเภอเมืองภูเก็ต ภูเก็ต 83000 ประเทศไทย",
+          "address": "21 ถนน เทพกระษัตรี ตำบล รัษฎา อำเภอเมืองภูเก็ต ภูเก็ต 83000 ประเทศไทย",
           "latitude": 7.910254,
           "longitude": 98.386094,
     })
   }
-  else if (msg.includes('ปฏิทินการศึกษา')) {
+  else if (msg.includes('ปฎิทินการศึกษา')) {
     let picture_url = baseURL+'/static/picture.jpg';
     return client.replyMessage(replyToken,
     {
@@ -288,7 +265,7 @@ function handleMessage(message, replyToken, author) {
           "contents": [
             {
               "type": "text",
-              "text": "User "+author.id,
+              "text": author.username+" ส่งข้อความถึงบอท",
               "weight": "bold",
               "color": "#aaaaaa",
               "size": "sm"
@@ -318,7 +295,7 @@ function handleMessage(message, replyToken, author) {
               "contents": [
                 {
                   "type": "text",
-                  "text": author.username+" ส่งข้อความถึงบอท",
+                  "text": "ID: "+author.id,
                   "gravity": "top",
                   "size": "md",
                   "flex": 1
@@ -508,6 +485,18 @@ function handleSticker(message, replyToken) {
   );
 }
 
+con.connect((err) => {
+  if (err) throw err;
+  console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
+  let sql_select = 'SELECT * FROM botline WHERE id = 1';
+  con.query(sql_select, (err, result) => {
+    if (err) throw err;
+    console.log('อ่านฐานข้อมูลเสร็จแล้ว');
+    console.log(result[0]);
+    con.destroy();
+  });
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   if (baseURL) {
@@ -515,4 +504,18 @@ app.listen(port, () => {
   } else {
     console.log("It seems that BASE_URL is not set.");
   }
+  //บันทึกข้อมูลลงฐานข้อมูลทุกๆ 5 วินาที
+  setInterval(function() {
+   con.connect((err) => {
+    if (err) throw err;
+    console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
+    let backup = JSON.stringify(nosql);
+    let sql = `UPDATE botline SET nosql = '${backup}' WHERE id = '1'`;
+    con.query(sql, (err, result) => {
+      if (err) throw err; 
+      console.log(result.affectedRows + " record(s) updated");
+      con.destroy();
+    });
+   });
+  }, 5000);
 });
