@@ -94,7 +94,7 @@ function handleEvent(event) {
   }
 }
 let AdminID = 'U1b1284059649875eaf3b0a66d586989f';
-const nosql = {
+var nosql = {
   chat: [
     {
       ask: 'ลงทะเบียน',
@@ -495,6 +495,7 @@ con.query(sql_select, (error, result) => {
   if (error) return console.error(error);
   console.log('อ่านฐานข้อมูลเสร็จแล้ว');
   console.log(result[0].nosql);
+  nosql = result[0].nosql;
 });
 
 const port = process.env.PORT || 3000;
@@ -514,7 +515,7 @@ app.listen(port, () => {
     let sql = `UPDATE botline SET nosql = '${backup}' WHERE id = '1'`;
     con.query(sql, (error, result) => {
     if (error) return console.error(error);
-      console.log(result.affectedRows + " record(s) updated");
+      console.log("บันทึกข้อมูลปัจจุบันลงฐานข้อมูล");
     });
   }, 5000);
 });
