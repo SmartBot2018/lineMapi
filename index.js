@@ -94,7 +94,7 @@ function handleEvent(event) {
   }
 }
 let AdminID = 'U1b1284059649875eaf3b0a66d586989f';
-let nosql = {
+const nosql = {
   chat: [
     {
       ask: "ลงทะเบียน",
@@ -133,7 +133,7 @@ function checkPostback(to, msg, author) {
   var has = false;
   var ask = '';
   var ans = '';
-  var item = nosql.postback[Object.keys(database).length];
+  var item = nosql.postback[0];
   if (!item) {
     console.log("No postback handle.");
     return has;
@@ -143,7 +143,7 @@ function checkPostback(to, msg, author) {
     ask = item.ask;
     ans = msg;
     has = true;
-    delete nosql.postback[Object.keys(database).length];
+    delete nosql.postback[0];
   }
   if (has && author.id == AdminID) {
     console.log("Push Mesaage to User Id");
