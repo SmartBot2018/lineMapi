@@ -485,19 +485,16 @@ function handleSticker(message, replyToken) {
   );
 }
 
-con.connect((err) => {
-  if (err) return console.error(err);
+if(!con._connectCalled) 
+{
+  con.connect();
   console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
-  let sql_select = 'SELECT * FROM botline';
-  con.query(sql_select, (error, result) => {
-    if (error) return console.error(error);
-    console.log('อ่านฐานข้อมูลเสร็จแล้ว');
-    console.log(result[0].nosql);
-    if(!con._connectCalled) 
-    {
-      con.connect();
-    }
-  });
+}
+let sql_select = 'SELECT * FROM botline';
+con.query(sql_select, (error, result) => {
+  if (error) return console.error(error);
+  console.log('อ่านฐานข้อมูลเสร็จแล้ว');
+  console.log(result[0].nosql);
 });
 
 const port = process.env.PORT || 3000;
@@ -509,19 +506,15 @@ app.listen(port, () => {
   }
   //บันทึกข้อมูลลงฐานข้อมูลทุกๆ 5 วินาที
   setInterval(function() {
-   con.connect((err) => {
-    if (err) return console.error(err);
-    console.log("เชื่อมต่อฐานข้อมูลสำเร็จ!");
+    if(!con._connectCalled) 
+    {
+      con.connect();
+    }
     let backup = JSON.stringify(nosql);
     let sql = `UPDATE botline SET nosql = '${backup}' WHERE id = '1'`;
     con.query(sql, (error, result) => {
     if (error) return console.error(error);
       console.log(result.affectedRows + " record(s) updated");
-      if(!con._connectCalled) 
-      {
-        con.connect();
-      }
     });
-   });
   }, 5000);
 });
