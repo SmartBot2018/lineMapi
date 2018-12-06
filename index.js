@@ -198,11 +198,11 @@ function handleMessage(message, replyToken, author) {
   let msg = message.text; //ข้อความที่ส่งมา
   let to = replyToken; //Token สำหรับตอบกลับผู้ส่งแชทมา
   if (!to) return; //หากไม่มี Token ให้ย้อนกลับกรือจบการทำงานโค๊ด
-  if (checkPostback(to, msg, author)) {
+  if (checkPostback(to, msg, author) && author.id == AdminID) {
     return;
-  } else if (teachBot(author.id)) {
+  } else if (teachBot(author.id) && author.id == AdminID) {
     return replyTeach(to, msg, author);
-  } else if (msg.startsWith("สอน")) {
+  } else if (msg.startsWith("สอน") && author.id == AdminID) {
     nosql.teach.push({id: author.id, ask: '', ans: ''});
     return replyText(to, 'จะให้บอทเรียนคำถามอะไรครับ');
   }
