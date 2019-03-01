@@ -205,7 +205,7 @@ function handleMessage(message, replyToken, author) {
     return replyTeach(to, msg, author);
   } else if (msg.startsWith("สอน") && author.id == AdminID) {
     nosql.teach.push({id: author.id, ask: '', ans: ''});
-    return replyText(to, 'จะให้บอทเรียนคำถามอะไรครับ');
+    return replyText(to, 'จะให้บอทเรียนรู้คำถามอะไรครับ');
   }
   let database = nosql.chat;
   let reply = {};
@@ -220,6 +220,9 @@ function handleMessage(message, replyToken, author) {
   else if (msg.includes('สวัสดี')) { //หาก ข้อความที่ส่งมา == สวัสดี
     return replyText(to, 'สวัสดีครับ'); //ส่งข้อความกลับไปหา Token พร้อม คำพูด
   }
+  else if (msg.includes('สาขาที่เปิดสอน')) {
+    subject_list(to);
+  }
   else if (msg.includes('ตำแหน่ง')) {
     return client.replyMessage(replyToken,
     {
@@ -231,7 +234,7 @@ function handleMessage(message, replyToken, author) {
           "longitude": 98.386094,
     })
   }
-  else if (msg.includes('ปฎิทินการศึกษา')) {
+  else if (msg.includes('ปฏิทินการศึกษา')) {
     let picture_url = baseURL+'/static/picture.jpg';
     return client.replyMessage(replyToken,
     {
@@ -523,3 +526,105 @@ app.listen(port, () => {
     });
   }, 5000);
 });
+
+function subject_list(to) {
+  return client.replyMessage(
+    to, {
+    "type": "template",
+    "altText": "this is a carousel template",
+    "template": {
+      "type": "carousel",
+      "actions": [],
+      "columns": [
+        {
+          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
+          "text": "สาขาวิชาคณิตศาสตร์ประยุกต์",
+          "actions": [
+            {
+              "type": "uri",
+              "label": "เข้าสู่เว็บไซต์",
+              "uri": "http://www.pkru.ac.th/mathsci/"
+            }
+          ]
+        },
+        {
+          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
+          "text": "สาขาวิชาคหกรรมศาสตร์",
+          "actions": [
+            {
+              "type": "message",
+              "label": "เข้าสู่เว็บไซต์",
+              "text": "http://www.pkru.ac.th/th/news/news/tag/สาขาวิชาคหกรรมศาสตร์"
+            }
+          ]
+        },
+        {
+          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
+          "text": "สาขาวิชาวิทยาศาสตร์",
+          "actions": [
+            {
+              "type": "uri",
+              "label": "เข้าสู่เว็บไซต์",
+              "uri": "http://www.pkru.ac.th/th/component/k2/tag/สาขาวิชาวิทยาศาสตร์ทั่วไป"
+            }
+          ]
+        },
+        {
+          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
+          "text": "สาขาวิชาวิทยาศาสตร์สิ่งแวดล้อม",
+          "actions": [
+            {
+              "type": "uri",
+              "label": "เข้าสู่เว็บไซต์",
+              "uri": "http://www.pkru.ac.th/envisci/"
+            }
+          ]
+        },
+        {
+          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
+          "text": "สาธารณสุขศาสตรบัณฑิต",
+          "actions": [
+            {
+              "type": "uri",
+              "label": "เข้าสู่เว็บไซต์",
+              "uri": "http://www.pkru.ac.th/th/news/tag/สาขาวิชาสาธารณสุขศาสตร์"
+            }
+          ]
+        },
+        {
+          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
+          "text": "สาขาวิชาเทคโนโลยีดิจิทัล",
+          "actions": [
+            {
+              "type": "uri",
+              "label": "เข้าสู่เว็บไซต์",
+              "uri": "http://www.pkru.ac.th/it/"
+            }
+          ]
+        },
+        {
+          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
+          "text": "สาขาวิชาเทคโนโลยีสถาปัตยกรรม",
+          "actions": [
+            {
+              "type": "uri",
+              "label": "เข้าสู่เว็บไซต์",
+              "uri": "http://archtech.pkru.ac.th/th/"
+            }
+          ]
+        },
+        {
+          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
+          "text": "สาขาวิชาเทคโนโลยีอุตสาหการ",
+          "actions": [
+            {
+              "type": "uri",
+              "label": "เข้าสู่เว็บไซต์",
+              "uri": "http://www.pkru.ac.th/industrial/"
+            }
+          ]
+        }
+      ]
+    }
+  });
+}
