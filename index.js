@@ -846,7 +846,7 @@ function subject_list(to) {
 
 var helpObject = {
   "type": "flex",
-  "altText": "Flex Message",
+  "altText": "HELP คำช่วยเหลือ",
   "contents": {
     "type": "bubble",
     "direction": "ltr",
@@ -863,7 +863,6 @@ var helpObject = {
         }
       ]
     },
-    "footer": {},
     "styles": {
       "header": {
         "backgroundColor": "#FFFFFF"
@@ -951,6 +950,6 @@ function help_list(to) {
     }
   })
   let helpObj = helpObject;
-  helpObj.contents.footer = help;
+  helpObj.contents.push({footer:help});
   return client.pushMessage(to, helpObj);
 }
