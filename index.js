@@ -204,6 +204,7 @@ const replyTeach = (to, msg, author) => {
       if (item.id == author.id) {
         item.ans = msg;
         nosql.chat.push({ask: item.ask,ans: item.ans});
+        nosql.help.push({name: item.ask, text: item.ask})
         return replyText(to, 'บอทได้เรียนรู้\nคำถาม: '+item.ask+'\nคำตอบ: '+item.ans+'\n')
         .then(item.id = '1'+(Math.floor(Math.random * 9999)));
       }
@@ -259,7 +260,7 @@ function handleMessage(message, replyToken, author) {
       previewImageUrl: picture_url,
     })
   }
-  else if (msg.startsWith('help') || msg.startsWith('คำสั่ง') || msg.startsWith('ช่วยเหลือ')) {
+  else if (msg.toLowerCase().startsWith('help') || msg.startsWith('คำสั่ง') || msg.startsWith('ช่วยเหลือ')) {
     help_list(to);
   }
   else if (msg.startsWith('!eval')) { //คำสั่งพิเศษ สำหรับ Debug bot แบบ Real-Time
