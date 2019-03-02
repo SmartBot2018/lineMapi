@@ -95,6 +95,7 @@ function handleEvent(event) {
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 }
+
 let AdminID = 'U1b1284059649875eaf3b0a66d586989f';
 client.pushMessage(AdminID, {type:'text',text: "บอทเริ่มการทำงาน"});
 const nosql = {
@@ -239,6 +240,17 @@ function handleMessage(message, replyToken, author) {
   }
   else if (msg.includes('สาขาที่เปิดสอน')) {
     subject_list(to);
+  }
+  else if (msg.includes('ลบชุดคำสั่ง')){
+    let datas = { flex:[] };
+    nosql.chat.forEach(item=>{
+      nosql.help.forEach(items=>{
+        if (items == item) {
+          datas.flex.push({ask:item.ask,ans:item.ans});
+        }
+      });
+    });
+    delete_list(to, datas);
   }
   else if (msg.includes('ตำแหน่ง')) {
     return client.replyMessage(replyToken,
@@ -1087,4 +1099,62 @@ let helpObject = {
     }
   })
   return client.replyMessage(to, help);
+}
+
+function delete_list(to, data) {
+  let del = {
+    "type": "flex",
+    "altText": "Flex Message",
+    "contents": {
+      "type": "carousel",
+      "contents": [
+        
+      ]
+    }
+  }
+  if (Object.keys(data).length < 1) return console.log("ไม่มีรายการสอน");
+  data.flex.forEach(teached=>{
+    let flex = {
+      "type": "bubble",
+      "direction": "ltr",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "คำถาม : "+teached.ask,
+            "align": "start",
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "คำตอบ : "+teached.ans,
+            "align": "start",
+            "weight": "bold",
+            "wrap": true
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "label": "ลบชุดคำสั่ง",
+              "text": "ลบสอน "+teached.ask,
+              "data": "ลบสอน "+teached.ask
+            },
+            "color": "#20BF0F",
+            "style": "primary"
+          }
+        ]
+      }
+    }
+    del.contents.contents.push(flex);
+  })
+  return client.replyMessage(to, del);
 }
