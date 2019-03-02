@@ -529,102 +529,305 @@ app.listen(port, () => {
 
 function subject_list(to) {
   return client.replyMessage(
-    to, {
-    "type": "template",
-    "altText": "this is a carousel template",
-    "template": {
-      "type": "carousel",
-      "actions": [],
-      "columns": [
-        {
-          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
-          "text": "สาขาวิชาคณิตศาสตร์ประยุกต์",
-          "actions": [
-            {
-              "type": "uri",
-              "label": "เข้าสู่เว็บไซต์",
-              "uri": "http://www.pkru.ac.th/mathsci/"
+    to, 
+    {
+      "type": "flex",
+      "altText": "Flex Message",
+      "contents": {
+        "type": "carousel",
+        "contents": [
+          {
+            "type": "bubble",
+            "direction": "ltr",
+            "hero": {
+              "type": "image",
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
+              "size": "full",
+              "aspectRatio": "1.51:1",
+              "aspectMode": "fit"
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "สาขาวิชาคณิตศาสตร์ประยุกต์",
+                  "align": "center",
+                  "gravity": "bottom",
+                  "weight": "regular",
+                  "color": "#000000"
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "เข้าสู่เว็บไซต์",
+                    "uri": "http://www.pkru.ac.th/mathsci/"
+                  }
+                }
+              ]
             }
-          ]
-        },
-        {
-          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
-          "text": "สาขาวิชาคหกรรมศาสตร์",
-          "actions": [
-            {
-              "type": "message",
-              "label": "เข้าสู่เว็บไซต์",
-              "text": "http://www.pkru.ac.th/th/news/news/tag/สาขาวิชาคหกรรมศาสตร์"
+          },
+          {
+            "type": "bubble",
+            "direction": "ltr",
+            "hero": {
+              "type": "image",
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
+              "size": "full",
+              "aspectRatio": "1.51:1",
+              "aspectMode": "fit"
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "สาขาวิชาคหกรรมศาสตร์",
+                  "align": "center"
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "เข้าสู่เว็บไซต์",
+                    "uri": "http://www.pkru.ac.th/th/news/news/tag/สาขาวิชาคหกรรมศาสตร์"
+                  }
+                }
+              ]
             }
-          ]
-        },
-        {
-          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
-          "text": "สาขาวิชาวิทยาศาสตร์",
-          "actions": [
-            {
-              "type": "uri",
-              "label": "เข้าสู่เว็บไซต์",
-              "uri": "http://www.pkru.ac.th/th/component/k2/tag/สาขาวิชาวิทยาศาสตร์ทั่วไป"
+          },
+          {
+            "type": "bubble",
+            "direction": "ltr",
+            "hero": {
+              "type": "image",
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
+              "size": "full",
+              "aspectRatio": "1.51:1",
+              "aspectMode": "fit"
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "สาขาวิชาวิทยาศาสตร์",
+                  "align": "center"
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "เข้าสู่เว็บไซต์",
+                    "uri": "http://www.pkru.ac.th/th/component/k2/tag/สาขาวิชาวิทยาศาสตร์ทั่วไป"
+                  }
+                }
+              ]
             }
-          ]
-        },
-        {
-          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
-          "text": "สาขาวิชาวิทยาศาสตร์สิ่งแวดล้อม",
-          "actions": [
-            {
-              "type": "uri",
-              "label": "เข้าสู่เว็บไซต์",
-              "uri": "http://www.pkru.ac.th/envisci/"
+          },
+          {
+            "type": "bubble",
+            "direction": "ltr",
+            "hero": {
+              "type": "image",
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
+              "size": "full",
+              "aspectRatio": "1.51:1",
+              "aspectMode": "fit"
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "สาขาวิชาวิทยาศาสตร์สิ่งแวดล้อม",
+                  "align": "center"
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "เข้าสู่เว็บไซต์",
+                    "uri": "http://www.pkru.ac.th/envisci/"
+                  }
+                }
+              ]
             }
-          ]
-        },
-        {
-          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
-          "text": "สาธารณสุขศาสตรบัณฑิต",
-          "actions": [
-            {
-              "type": "uri",
-              "label": "เข้าสู่เว็บไซต์",
-              "uri": "http://www.pkru.ac.th/th/news/tag/สาขาวิชาสาธารณสุขศาสตร์"
+          },
+          {
+            "type": "bubble",
+            "direction": "ltr",
+            "hero": {
+              "type": "image",
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
+              "size": "full",
+              "aspectRatio": "1.51:1",
+              "aspectMode": "fit"
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "สาธารณสุขศาสตรบัณฑิต",
+                  "align": "center"
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "เข้าสู่เว็บไซต์",
+                    "uri": "http://www.pkru.ac.th/th/news/tag/สาขาวิชาสาธารณสุขศาสตร์"
+                  }
+                }
+              ]
             }
-          ]
-        },
-        {
-          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
-          "text": "สาขาวิชาเทคโนโลยีดิจิทัล",
-          "actions": [
-            {
-              "type": "uri",
-              "label": "เข้าสู่เว็บไซต์",
-              "uri": "http://www.pkru.ac.th/it/"
+          },
+          {
+            "type": "bubble",
+            "direction": "ltr",
+            "hero": {
+              "type": "image",
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
+              "size": "full",
+              "aspectRatio": "1.51:1",
+              "aspectMode": "fit"
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "สาขาวิชาเทคโนโลยีดิจิทัล",
+                  "align": "center"
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "เข้าสู่เว็บไซต์",
+                    "uri": "http://www.pkru.ac.th/it/"
+                  }
+                }
+              ]
             }
-          ]
-        },
-        {
-          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
-          "text": "สาขาวิชาเทคโนโลยีสถาปัตยกรรม",
-          "actions": [
-            {
-              "type": "uri",
-              "label": "เข้าสู่เว็บไซต์",
-              "uri": "http://archtech.pkru.ac.th/th/"
+          },
+          {
+            "type": "bubble",
+            "direction": "ltr",
+            "hero": {
+              "type": "image",
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
+              "size": "full",
+              "aspectRatio": "1.51:1",
+              "aspectMode": "fit"
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "สาขาวิชาเทคโนโลยีสถาปัตยกรรม",
+                  "align": "center"
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "เข้าสู่เว็บไซต์",
+                    "uri": "http://archtech.pkru.ac.th/th/"
+                  }
+                }
+              ]
             }
-          ]
-        },
-        {
-          "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
-          "text": "สาขาวิชาเทคโนโลยีอุตสาหการ",
-          "actions": [
-            {
-              "type": "uri",
-              "label": "เข้าสู่เว็บไซต์",
-              "uri": "http://www.pkru.ac.th/industrial/"
+          },
+          {
+            "type": "bubble",
+            "direction": "ltr",
+            "hero": {
+              "type": "image",
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
+              "size": "full",
+              "aspectRatio": "1.51:1",
+              "aspectMode": "fit"
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "สาขาวิชาเทคโนโลยีอุตสาหการ",
+                  "align": "center"
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "เข้าสู่เว็บไซต์",
+                    "uri": "http://www.pkru.ac.th/industrial/"
+                  }
+                }
+              ]
             }
-          ]
-        }
-      ]
-    }
-  });
+          }
+        ]
+      }
+    });
 }
