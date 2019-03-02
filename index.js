@@ -94,6 +94,7 @@ function handleEvent(event) {
   }
 }
 let AdminID = 'U1b1284059649875eaf3b0a66d586989f';
+client.pushMessage(AdminID, {type:'text',text: "บอทเริ่มการทำงาน"});
 const nosql = {
   chat: [
     {
@@ -202,6 +203,11 @@ function handleMessage(message, replyToken, author) {
   if (checkPostback(to, msg, author) && author.id == AdminID) {
     return;
   } else if (teachBot(author.id) && author.id == AdminID) {
+    database.forEach(item => {
+      if (item.id == author.id) {
+        delete item.id;
+      }
+    });
     return replyTeach(to, msg, author);
   } else if (msg.startsWith("สอน") && author.id == AdminID) {
     nosql.teach.push({id: author.id, ask: '', ans: ''});
@@ -242,16 +248,6 @@ function handleMessage(message, replyToken, author) {
       originalContentUrl: picture_url,
       previewImageUrl: picture_url,
     })
-  }
-  else if (msg.startsWith('!สอน')) {
-    let teact = msg.slice(5);
-    let askmsg = teact.split(' ')[0];
-    let ansmsg = teact.split(' ')[1];
-    database.push({ask:askmsg,ans:ansmsg});
-    return replyText(to, 'คุนได้สอนบอทพูด\nคำถาม: '+askmsg+'\nคำตอบ: '+ansmsg);
-  }
-  else if (msg.startsWith('!แสดงข้อความ')) {
-    nosql.chat.forEach((item) => { client.pushMessage(AdminID, { type: "text", text: `ถาม:${item.ask}\nตอบ:${item.ans}` }) })
   }
   else if (msg.startsWith('!eval')) { //คำสั่งพิเศษ สำหรับ Debug bot แบบ Real-Time
     let cmd = msg.slice(6);
