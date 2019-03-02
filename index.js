@@ -909,9 +909,9 @@ let helpObject = {
           "type": "button",
           "action": {
             "type": "postback",
-            "label": "ปฏิทินการศึกษา",
-            "text": "ปฏิทินการศึกษา",
-            "data": "ปฏิทินการศึกษา"
+            "label": "สาขาที่เปิดสอน",
+            "text": "สาขาที่เปิดสอน",
+            "data": "สาขาที่เปิดสอน"
           },
           "color": "#20BF0F",
           "style": "primary"
