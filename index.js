@@ -863,6 +863,68 @@ var helpObject = {
         }
       ]
     },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "action": {
+            "type": "postback",
+            "label": "ลงทะเบียน",
+            "text": "ลงทะเบียน",
+            "data": "ลงทะเบียน"
+          },
+          "color": "#20BF0F",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "postback",
+            "label": "วันเปิดภาคเรียน",
+            "text": "วันเปิดภาคเรียน",
+            "data": "วันเปิดภาคเรียน"
+          },
+          "color": "#20BF0F",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "postback",
+            "label": "วันสอบสัมภาษณ์",
+            "text": "วันสอบสัมภาษณ์",
+            "data": "สอบสัมภาษณ์"
+          },
+          "color": "#20BF0F",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "postback",
+            "label": "ชำระเงิน",
+            "text": "ชำระเงิน",
+            "data": "ชำระเงิน"
+          },
+          "color": "#20BF0F",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "postback",
+            "label": "ติดต่อ",
+            "text": "ติดต่อ",
+            "data": "ติดต่อ"
+          },
+          "color": "#20BF0F",
+          "style": "primary"
+        }
+      ]
+    },
     "styles": {
       "header": {
         "backgroundColor": "#FFFFFF"
@@ -872,71 +934,10 @@ var helpObject = {
 }
 
 function help_list(to) {
-  let help = {
-    "type": "box",
-    "layout": "vertical",
-    "spacing": "sm",
-    "contents": [
-      {
-        "type": "button",
-        "action": {
-          "type": "postback",
-          "label": "ลงทะเบียน",
-          "text": "ลงทะเบียน",
-          "data": "ลงทะเบียน"
-        },
-        "color": "#20BF0F",
-        "style": "primary"
-      },
-      {
-        "type": "button",
-        "action": {
-          "type": "postback",
-          "label": "วันเปิดภาคเรียน",
-          "text": "วันเปิดภาคเรียน",
-          "data": "วันเปิดภาคเรียน"
-        },
-        "color": "#20BF0F",
-        "style": "primary"
-      },
-      {
-        "type": "button",
-        "action": {
-          "type": "postback",
-          "label": "วันสอบสัมภาษณ์",
-          "text": "วันสอบสัมภาษณ์",
-          "data": "สอบสัมภาษณ์"
-        },
-        "color": "#20BF0F",
-        "style": "primary"
-      },
-      {
-        "type": "button",
-        "action": {
-          "type": "postback",
-          "label": "ชำระเงิน",
-          "text": "ชำระเงิน",
-          "data": "ชำระเงิน"
-        },
-        "color": "#20BF0F",
-        "style": "primary"
-      },
-      {
-        "type": "button",
-        "action": {
-          "type": "postback",
-          "label": "ติดต่อ",
-          "text": "ติดต่อ",
-          "data": "ติดต่อ"
-        },
-        "color": "#20BF0F",
-        "style": "primary"
-      }
-    ]
-  }
+  let help = helpObj
   nosql.help.forEach(button=>{
     if (button) {
-      help.contents.push({
+      help.contents.footer.contents.push({
         "type": "button",
         "action": {
           "type": "postback",
@@ -949,7 +950,5 @@ function help_list(to) {
       })
     }
   })
-  let helpObj = helpObject;
-  helpObj.contents.push({footer:help});
-  return client.pushMessage(to, helpObj);
+  return client.pushMessage(to, help);
 }
