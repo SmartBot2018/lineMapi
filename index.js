@@ -894,6 +894,17 @@ var helpObject = {
           "type": "button",
           "action": {
             "type": "postback",
+            "label": "ปฏิทินการศึกษา",
+            "text": "ปฏิทินการศึกษา",
+            "data": "ปฏิทินการศึกษา"
+          },
+          "color": "#20BF0F",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "postback",
             "label": "วันสอบสัมภาษณ์",
             "text": "วันสอบสัมภาษณ์",
             "data": "สอบสัมภาษณ์"
@@ -934,7 +945,7 @@ var helpObject = {
 }
 
 function help_list(to) {
-  let help = helpObj
+  let help = helpObject;
   nosql.help.forEach(button=>{
     if (button) {
       help.contents.footer.contents.push({
