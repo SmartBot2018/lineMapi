@@ -138,11 +138,11 @@ function checkPostback(to, msg, author) {
   var ask = '';
   var ans = '';
   var reply;
-  nosql.postback = database.map(item => {
+  database.forEach((item, i) => {
     if (!item.finish) {
       item.finish = true;
       reply = item;
-      return item;
+      nosql.postback[i] = item;
     }
   })
   if (!reply) {
@@ -153,11 +153,15 @@ function checkPostback(to, msg, author) {
     ask = reply.ask;
     ans = msg;
     has = true;
+    database.forEach((item, i) => {
+      if (item.finish) {
+        delete nosql.postback[i];
+      }
+    })
   }
   if (has && author.id == AdminID) {
     console.log("Push Mesaage to User Id "+id);
     client.pushMessage(id, {type:'text',text: msg}).catch((err) => console.error(err))
-    client.pushMessage(AdminID, {type:'text', text: "คุณได้ตอบกลับคำถาม "})
     nosql.chat.push({ask:ask,ans:ans});
   }
   return Boolean(has);
@@ -444,7 +448,7 @@ app.listen(port, () => {
     let sql = `UPDATE botline SET nosql = '${backup}' WHERE id = '1'`;
     con.query(sql, (error, result) => {
     if (error) return console.error(error);
-      console.log("บันทึกข้อมูลปัจจุบันลงฐานข้อมูล");
+      //console.log("บันทึกข้อมูลปัจจุบันลงฐานข้อมูล");
     });
   }, 5000);
 });
