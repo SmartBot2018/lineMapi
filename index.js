@@ -909,6 +909,17 @@ let helpObject = {
           "type": "button",
           "action": {
             "type": "postback",
+            "label": "ปฏิทินการศึกษา",
+            "text": "ปฏิทินการศึกษา",
+            "data": "ปฏิทินการศึกษา"
+          },
+          "color": "#20BF0F",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "postback",
             "label": "วันสอบสัมภาษณ์",
             "text": "วันสอบสัมภาษณ์",
             "data": "สอบสัมภาษณ์"
