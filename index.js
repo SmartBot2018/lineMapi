@@ -79,7 +79,7 @@ function handleEvent(event) {
         let id = data.split('_')[1];
         let ask = data.split('_')[2];
         rep = "ตอบกลับ User "+id+"\n"+rep
-        nosql.postback.push({id:id, ask: ask, ans:''});
+        nosql.postback.push({id:id, ask: ask, ans:'', finish: false});
         return client.pushMessage(AdminID, {type:'text',text:rep});
       }
       if (data === 'DATE' || data === 'TIME' || data === 'DATETIME') {
@@ -136,6 +136,11 @@ function checkPostback(to, msg, author) {
   var has = false;
   var ask = '';
   var ans = '';
+  database.forEach(item => {
+    if (!item.finish) {
+      
+    }
+  })
   var item = database[index-1];
   if (!item) {
     console.log("No postback handle.");
@@ -145,7 +150,7 @@ function checkPostback(to, msg, author) {
     ask = item.ask;
     ans = msg;
     has = true;
-    delete nosql.postback[item];
+    delete nosql.postback[index-1];
   }
   if (has && author.id == AdminID) {
     console.log("Push Mesaage to User Id "+id);
@@ -214,7 +219,7 @@ function handleMessage(message, replyToken, author) {
   database.forEach(item => {
     if (msg.includes(item.ask)) {
       reply = item;
-    } 
+    }
   });
   if (msg.includes(reply.ask)) {
     return replyText(to, reply.ans);
@@ -252,85 +257,7 @@ function handleMessage(message, replyToken, author) {
   }
   else
   {
-    client.pushMessage(AdminID, {
-      "type": "flex",
-      "altText": "ข้อความใหม่",
-      "contents":  {
-        "type": "bubble",
-        "header": {
-          "type": "box",
-          "layout": "horizontal",
-          "contents": [
-            {
-              "type": "text",
-              "text": author.username+" ส่งข้อความถึงบอท",
-              "weight": "bold",
-              "color": "#aaaaaa",
-              "size": "sm"
-            }
-          ]
-        },
-        "hero": {
-          "type": "image",
-          "url": `${author.picture}`,
-          "size": "full",
-          "aspectRatio": "20:13",
-          "aspectMode": "cover",
-          "action": {
-            "type": "uri",
-            "uri": `${author.picture}`
-          }
-        },
-        "body": {
-          "type": "box",
-          "layout": "horizontal",
-          "spacing": "md",
-          "contents": [
-            {
-              "type": "box",
-              "layout": "vertical",
-              "flex": 2,
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "ID: "+author.id,
-                  "gravity": "top",
-                  "size": "md",
-                  "flex": 1
-                },
-                {
-                  "type": "separator"
-                },
-                {
-                  "type": "text",
-                  "text": msg,
-                  "gravity": "center",
-                  "wrap": true,
-                  "size": "xs",
-                  "flex": 2
-                }
-              ]
-            }
-          ]
-        },
-        "footer": {
-          "type": "box",
-          "layout": "horizontal",
-          "contents": [
-            {
-              "type": "button",
-              "style": "primary",
-              "color": "#000000",
-              "action": {
-                "type": "postback",
-                "label": "ตอบ",
-                "data": 'nomsg_'+author.id+'_'+msg,
-              }
-            }
-          ]
-        }
-      }
-    }).catch((err) => console.error(err));
+    Receiver(AdminID, msg, author);
   }
 }
 
@@ -518,6 +445,88 @@ app.listen(port, () => {
     });
   }, 5000);
 });
+
+function Receiver(to, msg, author) {
+  client.pushMessage(to, {
+    "type": "flex",
+    "altText": "ส่งข้อความถึงคุณ",
+    "contents":  {
+        "type": "bubble",
+        "header": {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+            {
+            "type": "text",
+            "text": author.username+" ส่งข้อความถึงบอท",
+            "weight": "bold",
+            "color": "#aaaaaa",
+            "size": "sm"
+            }
+        ]
+        },
+        "hero": {
+        "type": "image",
+        "url": `${author.picture}`,
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "cover",
+        "action": {
+            "type": "uri",
+            "uri": `${author.picture}`
+        }
+        },
+        "body": {
+        "type": "box",
+        "layout": "horizontal",
+        "spacing": "md",
+        "contents": [
+            {
+            "type": "box",
+            "layout": "vertical",
+            "flex": 2,
+            "contents": [
+                {
+                "type": "text",
+                "text": "ID: "+author.id,
+                "gravity": "top",
+                "size": "md",
+                "flex": 1
+                },
+                {
+                "type": "separator"
+                },
+                {
+                "type": "text",
+                "text": msg,
+                "gravity": "center",
+                "wrap": true,
+                "size": "xs",
+                "flex": 2
+                }
+            ]
+            }
+        ]
+        },
+        "footer": {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+            {
+            "type": "button",
+            "style": "primary",
+            "color": "#000000",
+            "action": {
+                "type": "postback",
+                "label": "ตอบ",
+                "data": 'nomsg_'+author.id+'_'+msg,
+            }
+            }
+        ]
+        }
+    }
+  }).catch((err) => console.error(err));
+}
 
 function subject_list(to) {
   return client.replyMessage(
