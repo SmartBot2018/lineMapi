@@ -126,7 +126,8 @@ const nosql = {
       ans: ''
     }
   ],
-  postback: []
+  postback: [],
+  help: []
 };
 
 function checkPostback(to, msg, author) {
@@ -248,7 +249,7 @@ function handleMessage(message, replyToken, author) {
           "longitude": 98.386094,
     })
   }
-  else if (msg.includes('ปฏิทินการศึกษา')) {
+  else if (msg.includes('ปฏิทินการศึกษา') || msg.includes('ปฎิทินการศึกษา')) {
     let picture_url = baseURL+'/static/picture.jpg';
     return client.replyMessage(replyToken,
     {
@@ -256,6 +257,9 @@ function handleMessage(message, replyToken, author) {
       originalContentUrl: picture_url,
       previewImageUrl: picture_url,
     })
+  }
+  else if (msg.startsWith('help') || msg.startsWith('คำสั่ง') || msg.startsWith('ช่วยเหลือ')) {
+    help_list(to);
   }
   else if (msg.startsWith('!eval')) { //คำสั่งพิเศษ สำหรับ Debug bot แบบ Real-Time
     let cmd = msg.slice(6);
@@ -838,4 +842,115 @@ function subject_list(to) {
         ]
       }
     });
+}
+
+var helpObject = {
+  "type": "flex",
+  "altText": "Flex Message",
+  "contents": {
+    "type": "bubble",
+    "direction": "ltr",
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "คำสั่งช่วยเหลือ",
+          "align": "center",
+          "weight": "bold",
+          "color": "#000000"
+        }
+      ]
+    },
+    "footer": {},
+    "styles": {
+      "header": {
+        "backgroundColor": "#FFFFFF"
+      }
+    }
+  }
+}
+
+function help_list(to) {
+  let help = {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "postback",
+          "label": "ลงทะเบียน",
+          "text": "ลงทะเบียน",
+          "data": "ลงทะเบียน"
+        },
+        "color": "#20BF0F",
+        "style": "primary"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "postback",
+          "label": "วันเปิดภาคเรียน",
+          "text": "วันเปิดภาคเรียน",
+          "data": "วันเปิดภาคเรียน"
+        },
+        "color": "#20BF0F",
+        "style": "primary"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "postback",
+          "label": "วันสอบสัมภาษณ์",
+          "text": "วันสอบสัมภาษณ์",
+          "data": "สอบสัมภาษณ์"
+        },
+        "color": "#20BF0F",
+        "style": "primary"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "postback",
+          "label": "ชำระเงิน",
+          "text": "ชำระเงิน",
+          "data": "ชำระเงิน"
+        },
+        "color": "#20BF0F",
+        "style": "primary"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "postback",
+          "label": "ติดต่อ",
+          "text": "ติดต่อ",
+          "data": "ติดต่อ"
+        },
+        "color": "#20BF0F",
+        "style": "primary"
+      }
+    ]
+  }
+  nosql.help.forEach(button=>{
+    if (button) {
+      help.contents.push({
+        "type": "button",
+        "action": {
+          "type": "postback",
+          "label": `${button.name}`,
+          "text": `${button.text}`,
+          "data": `${button.text}`
+        },
+        "color": "#20BF0F",
+        "style": "primary"
+      })
+    }
+  })
+  let helpObj = helpObject;
+  helpObj.contents.footer = help;
+  return client.pushMessage(to, helpObj);
 }
