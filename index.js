@@ -567,7 +567,7 @@ function subject_list(to) {
             },
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/picture.jpg',
+              "url": baseURL+'/static/logo.jpg',
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -620,7 +620,7 @@ function subject_list(to) {
             },
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/picture.jpg',
+              "url": baseURL+'/static/logo.jpg',
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -670,7 +670,7 @@ function subject_list(to) {
             },
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/picture.jpg',
+              "url": baseURL+'/static/logo.jpg',
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -720,7 +720,7 @@ function subject_list(to) {
             },
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/picture.jpg',
+              "url": baseURL+'/static/logo.jpg',
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -770,7 +770,7 @@ function subject_list(to) {
             },
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/picture.jpg',
+              "url": baseURL+'/static/logo.jpg',
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -820,7 +820,7 @@ function subject_list(to) {
             },
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/picture.jpg',
+              "url": baseURL+'/static/logo.jpg',
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -870,7 +870,7 @@ function subject_list(to) {
             },
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/picture.jpg',
+              "url": baseURL+'/static/logo.jpg',
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -920,7 +920,7 @@ function subject_list(to) {
             },
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/picture.jpg',
+              "url": baseURL+'/static/logo.jpg',
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
