@@ -555,7 +555,7 @@ function subject_list(to) {
             "direction": "ltr",
             "hero": {
               "type": "image",
-              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
+              "url": baseURL+'/static/logo.jpg',
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
