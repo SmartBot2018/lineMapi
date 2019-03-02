@@ -85,7 +85,8 @@ function handleEvent(event) {
       if (data === 'DATE' || data === 'TIME' || data === 'DATETIME') {
         data += `(${JSON.stringify(event.postback.params)})`;
       }
-      return replyText(event.replyToken, `ตอบกลับ: ${data}`);
+      console.log(`ตอบกลับ: ${data}`);
+      //return replyText(event.replyToken, `ตอบกลับ: ${data}`);
 
     case 'beacon':
       return replyText(event.replyToken, `Beacon: ${event.beacon.hwid}`);
