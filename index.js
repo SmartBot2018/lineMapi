@@ -130,31 +130,34 @@ const nosql = {
 };
 
 function checkPostback(to, msg, author) {
+  msg = msg.replace("ตอบ ","")
   let database = nosql.postback;
   let index = Object.keys(database).length;
   var id = '';
   var has = false;
   var ask = '';
   var ans = '';
-  database.forEach(item => {
+  var reply;
+  nosql.postback = database.map(item => {
     if (!item.finish) {
-      
+      item.finish = true;
+      reply = item;
+      return item;
     }
   })
-  var item = database[index-1];
-  if (!item) {
+  if (!reply) {
     console.log("No postback handle.");
   } else {
     console.log("Do postback habdle.");
-    id = item.id;
-    ask = item.ask;
+    id = reply.id;
+    ask = reply.ask;
     ans = msg;
     has = true;
-    delete nosql.postback[index-1];
   }
   if (has && author.id == AdminID) {
     console.log("Push Mesaage to User Id "+id);
     client.pushMessage(id, {type:'text',text: msg}).catch((err) => console.error(err))
+    client.pushMessage(AdminID, {type:'text', text: "คุณได้ตอบกลับคำถาม "})
     nosql.chat.push({ask:ask,ans:ans});
   }
   return Boolean(has);
@@ -206,7 +209,7 @@ function handleMessage(message, replyToken, author) {
   let msg = message.text; //ข้อความที่ส่งมา
   let to = replyToken; //Token สำหรับตอบกลับผู้ส่งแชทมา
   if (!to) return; //หากไม่มี Token ให้ย้อนกลับกรือจบการทำงานโค๊ด
-  if (checkPostback(to, msg, author) && author.id == AdminID) {
+  if (checkPostback(to, msg, author) && author.id == AdminID && msg.includes("ตอบ ")) {
     return;
   } else if (teachBot(author.id) && author.id == AdminID) {
     return replyTeach(to, msg, author);
