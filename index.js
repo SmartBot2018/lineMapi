@@ -553,6 +553,18 @@ function subject_list(to) {
           {
             "type": "bubble",
             "direction": "ltr",
+            "header": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ยินดีต้อนรับสู่เว็บไซต์",
+                  "align": "center",
+                  "weight": "bold"
+                }
+              ]
+            },
             "hero": {
               "type": "image",
               "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
@@ -594,6 +606,18 @@ function subject_list(to) {
           {
             "type": "bubble",
             "direction": "ltr",
+            "header": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ยินดีต้อนรับสู่เว็บไซต์",
+                  "align": "center",
+                  "weight": "bold"
+                }
+              ]
+            },
             "hero": {
               "type": "image",
               "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
@@ -632,6 +656,18 @@ function subject_list(to) {
           {
             "type": "bubble",
             "direction": "ltr",
+            "header": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ยินดีต้อนรับสู่เว็บไซต์",
+                  "align": "center",
+                  "weight": "bold"
+                }
+              ]
+            },
             "hero": {
               "type": "image",
               "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
@@ -670,6 +706,18 @@ function subject_list(to) {
           {
             "type": "bubble",
             "direction": "ltr",
+            "header": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ยินดีต้อนรับสู่เว็บไซต์",
+                  "align": "center",
+                  "weight": "bold"
+                }
+              ]
+            },
             "hero": {
               "type": "image",
               "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
@@ -708,6 +756,18 @@ function subject_list(to) {
           {
             "type": "bubble",
             "direction": "ltr",
+            "header": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ยินดีต้อนรับสู่เว็บไซต์",
+                  "align": "center",
+                  "weight": "bold"
+                }
+              ]
+            },
             "hero": {
               "type": "image",
               "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
@@ -746,6 +806,18 @@ function subject_list(to) {
           {
             "type": "bubble",
             "direction": "ltr",
+            "header": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ยินดีต้อนรับสู่เว็บไซต์",
+                  "align": "center",
+                  "weight": "bold"
+                }
+              ]
+            },
             "hero": {
               "type": "image",
               "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
@@ -784,6 +856,18 @@ function subject_list(to) {
           {
             "type": "bubble",
             "direction": "ltr",
+            "header": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ยินดีต้อนรับสู่เว็บไซต์",
+                  "align": "center",
+                  "weight": "bold"
+                }
+              ]
+            },
             "hero": {
               "type": "image",
               "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
@@ -822,6 +906,18 @@ function subject_list(to) {
           {
             "type": "bubble",
             "direction": "ltr",
+            "header": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ยินดีต้อนรับสู่เว็บไซต์",
+                  "align": "center",
+                  "weight": "bold"
+                }
+              ]
+            },
             "hero": {
               "type": "image",
               "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
