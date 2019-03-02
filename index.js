@@ -555,7 +555,7 @@ function subject_list(to) {
             "direction": "ltr",
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/logo.jpg',
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -584,7 +584,9 @@ function subject_list(to) {
                     "type": "uri",
                     "label": "เข้าสู่เว็บไซต์",
                     "uri": "http://www.pkru.ac.th/mathsci/"
-                  }
+                  },
+                  "color": "#20BF0F",
+                  "style": "primary"
                 }
               ]
             }
@@ -594,7 +596,7 @@ function subject_list(to) {
             "direction": "ltr",
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/logo.jpg',
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -620,7 +622,9 @@ function subject_list(to) {
                     "type": "uri",
                     "label": "เข้าสู่เว็บไซต์",
                     "uri": "http://www.pkru.ac.th/th/news/news/tag/สาขาวิชาคหกรรมศาสตร์"
-                  }
+                  },
+                  "color": "#20BF0F",
+                  "style": "primary"
                 }
               ]
             }
@@ -630,7 +634,7 @@ function subject_list(to) {
             "direction": "ltr",
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/logo.jpg',
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -656,7 +660,9 @@ function subject_list(to) {
                     "type": "uri",
                     "label": "เข้าสู่เว็บไซต์",
                     "uri": "http://www.pkru.ac.th/th/component/k2/tag/สาขาวิชาวิทยาศาสตร์ทั่วไป"
-                  }
+                  },
+                  "color": "#20BF0F",
+                  "style": "primary"
                 }
               ]
             }
@@ -666,7 +672,7 @@ function subject_list(to) {
             "direction": "ltr",
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/logo.jpg',
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -692,7 +698,9 @@ function subject_list(to) {
                     "type": "uri",
                     "label": "เข้าสู่เว็บไซต์",
                     "uri": "http://www.pkru.ac.th/envisci/"
-                  }
+                  },
+                  "color": "#20BF0F",
+                  "style": "primary"
                 }
               ]
             }
@@ -702,7 +710,7 @@ function subject_list(to) {
             "direction": "ltr",
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/logo.jpg',
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -728,7 +736,9 @@ function subject_list(to) {
                     "type": "uri",
                     "label": "เข้าสู่เว็บไซต์",
                     "uri": "http://www.pkru.ac.th/th/news/tag/สาขาวิชาสาธารณสุขศาสตร์"
-                  }
+                  },
+                  "color": "#20BF0F",
+                  "style": "primary"
                 }
               ]
             }
@@ -738,7 +748,7 @@ function subject_list(to) {
             "direction": "ltr",
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/logo.jpg',
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -764,7 +774,9 @@ function subject_list(to) {
                     "type": "uri",
                     "label": "เข้าสู่เว็บไซต์",
                     "uri": "http://www.pkru.ac.th/it/"
-                  }
+                  },
+                  "color": "#20BF0F",
+                  "style": "primary"
                 }
               ]
             }
@@ -774,7 +786,7 @@ function subject_list(to) {
             "direction": "ltr",
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/logo.jpg',
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -800,7 +812,9 @@ function subject_list(to) {
                     "type": "uri",
                     "label": "เข้าสู่เว็บไซต์",
                     "uri": "http://archtech.pkru.ac.th/th/"
-                  }
+                  },
+                  "color": "#20BF0F",
+                  "style": "primary"
                 }
               ]
             }
@@ -810,7 +824,7 @@ function subject_list(to) {
             "direction": "ltr",
             "hero": {
               "type": "image",
-              "url": baseURL+'/static/logo.jpg',
+              "url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
               "size": "full",
               "aspectRatio": "1.51:1",
               "aspectMode": "fit"
@@ -836,7 +850,9 @@ function subject_list(to) {
                     "type": "uri",
                     "label": "เข้าสู่เว็บไซต์",
                     "uri": "http://www.pkru.ac.th/industrial/"
-                  }
+                  },
+                  "color": "#20BF0F",
+                  "style": "primary"
                 }
               ]
             }
