@@ -846,7 +846,9 @@ function subject_list(to) {
     });
 }
 
-const helpObject = {
+
+function help_list(to) {
+let helpObject = {
   "type": "flex",
   "altText": "HELP คำช่วยเหลือ",
   "contents": {
@@ -945,9 +947,7 @@ const helpObject = {
     }
   }
 }
-
-function help_list(to) {
-  const help = helpObject;
+  let help = helpObject;
   nosql.help.forEach(button=>{
     if (button) {
       help.contents.footer.contents.push({
