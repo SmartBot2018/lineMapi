@@ -78,6 +78,7 @@ function handleEvent(event) {
       if (data.startsWith('nomsg')) {
         let id = data.split('_')[1];
         let ask = data.split('_')[2];
+        rep = "ตอบกลับ User "+id+"\n"+rep
         nosql.postback.push({id:id, ask: ask, ans:''});
         return client.pushMessage(AdminID, {type:'text',text:rep});
       }
@@ -144,10 +145,10 @@ function checkPostback(to, msg, author) {
     ask = item.ask;
     ans = msg;
     has = true;
-    delete nosql.postback[index-1];
+    delete nosql.postback[item];
   }
   if (has && author.id == AdminID) {
-    console.log("Push Mesaage to User Id");
+    console.log("Push Mesaage to User Id "+id);
     client.pushMessage(id, {type:'text',text: msg}).catch((err) => console.error(err))
     nosql.chat.push({ask:ask,ans:ans});
   }
@@ -203,11 +204,6 @@ function handleMessage(message, replyToken, author) {
   if (checkPostback(to, msg, author) && author.id == AdminID) {
     return;
   } else if (teachBot(author.id) && author.id == AdminID) {
-    database.forEach(item => {
-      if (item.id == author.id) {
-        delete item.id;
-      }
-    });
     return replyTeach(to, msg, author);
   } else if (msg.startsWith("สอน") && author.id == AdminID) {
     nosql.teach.push({id: author.id, ask: '', ans: ''});
