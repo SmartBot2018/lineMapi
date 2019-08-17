@@ -861,7 +861,7 @@ function subject_list(to) {
                   "action": {
                     "type": "uri",
                     "label": "เข้าสู่เว็บไซต์",
-                    "uri": "http://www.pkru.ac.th/it/"
+                    "uri": "http://www.pkru.ac.th/dt/"
                   },
                   "color": "#20BF0F",
                   "style": "primary"
