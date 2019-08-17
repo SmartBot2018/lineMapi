@@ -96,7 +96,7 @@ function handleEvent(event) {
   }
 }
 
-let AdminID = 'Ud91506efb205cb91f6f84b41844f90d9';
+let AdminID = 'Ua977e08485538fad4ae662635ac4636d';
 client.pushMessage(AdminID, {type:'text',text: "บอทเริ่มการทำงาน"});
 const nosql = {
   chat: [
